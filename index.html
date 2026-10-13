@@ -4,161 +4,46 @@ index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Gluna 8.5 FINAL</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gluna Lingua Kids 8.5</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Fredoka;background:#F5F7FF;min-height:100vh;padding-bottom:90px}
-.header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.06);position:sticky;top:0;z-index:10}
-#onboarding{position:fixed;inset:0;background:#F5F7FF;z-index:999;display:flex;align-items:center;justify-content:center;padding:16px}
-.box{background:#fff;border-radius:24px;padding:20px;max-width:400px;width:100%;box-shadow:0 16px 40px rgba(0,0,0,.12);display:none;flex-direction:column;max-height:92vh;overflow-y:auto}
-.box.active{display:flex}
-.opt{border:2px solid #EEF0F7;border-radius:14px;padding:12px;margin:5px 0;cursor:pointer;font-weight:600;background:#fff;display:flex;align-items:center;gap:8px}
-.opt.sel{background:#4D96FF!important;color:#fff!important;border-color:#4D96FF!important}
-.age-opt{border:2px solid #EEF0F7;border-radius:14px;padding:12px;text-align:center;cursor:pointer;font-weight:700;background:#fff}
-.age-opt.sel{background:#4D96FF!important;color:#fff!important;border-color:#4D96FF!important}
-.btn{border:none;padding:14px;border-radius:14px;width:100%;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#FF6B6B,#FFD93D,#6BCB77,#4D96FF,#845EC2);color:#fff;margin-top:8px;font-size:15px}
-.btn-ghost{background:#EEF0F7;color:#000}
-.main{max-width:480px;margin:0 auto;padding:16px}
-.big-card{background:#fff;border-radius:22px;padding:18px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.08);cursor:pointer;display:flex;align-items:center;gap:16px;border:3px solid transparent;text-align:left;width:100%}
-.big-card:hover{transform:translateY(-3px);border-color:#4D96FF}
-.big-icon{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0}
-.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.cat-card{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent}
-.cat-card:hover{border-color:#4D96FF}
-.game-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
-.game-card{background:#fff;border-radius:16px;padding:12px;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.06);cursor:pointer;font-size:11px;border:2px solid transparent}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:20}
-.nav-tab{flex:1;padding:14px;text-align:center;font-weight:700;opacity:.5;cursor:pointer;border-top:3px solid transparent}.nav-tab.active{opacity:1;border-top-color:#4D96FF;background:#F5F7FF}
-#gameModal{position:fixed;inset:0;background:#F5F7FF;z-index:100;display:none;flex-direction:column}#gameModal.active{display:flex}
-.modal-header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.modal-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:480px;margin:0 auto;width:100%}
-.tf-btn{width:100%;padding:13px;margin:5px 0;border-radius:12px;border:2px solid #EEF0F7;background:#fff;font-weight:700;cursor:pointer}
-.profile-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px}
-.letter-tile{display:inline-flex;width:42px;height:42px;background:#fff;border:2px solid #4D96FF;border-radius:10px;align-items:center;justify-content:center;font-weight:700;margin:3px;cursor:pointer}
-.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7B61FF,#FFD93D);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0}
+body{font-family:'Fredoka',sans-serif;background:#FFF8E7;}
+.card{transition:all.2s;}.card:active{transform:scale(.97);}
+.logo-fix{width:56px;height:56px;background:linear-gradient(135deg,#6D28D9,#FBBF24);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 12px rgba(109,40,217,.3);}
 </style>
 </head>
 <body>
-<div id="onboarding">
-  <div class="box active" id="step0">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div class="logo">🌙</div><b>Gluna Lingua</b></div>
-    <h2>🌈 ¡Hola! Soy Luna</h2>
-    <p style="color:#8A8FA8;font-size:13px;margin:8px 0">¿Cómo te llamas?</p>
-    <input id="kidName" style="width:100%;padding:12px;border:2px solid #EEF0F7;border-radius:12px;text-align:center;font-size:16px;font-family:Fredoka" placeholder="Ej: Elena, Gaddiel">
-    <p style="color:#8A8FA8;font-size:13px;margin:12px 0 6px">¿Cuántos años tienes?</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-      <div class="age-opt" id="age4" onclick="pickAge(4)">3-5<br>🧸</div>
-      <div class="age-opt" id="age7" onclick="pickAge(7)">6-8<br>🎒</div>
-      <div class="age-opt" id="age10" onclick="pickAge(10)">9-12<br>🚀</div>
-    </div>
-    <button class="btn" onclick="goStep1()">Continuar →</button>
-  </div>
-  <div class="box" id="step1"><h3 id="greetH">¡Hola!</h3><p style="margin:8px 0">¿Qué idioma hablas en casa?</p><div class="opt" onclick="pickNative('es')">🇪🇸 Español</div><div class="opt" onclick="pickNative('en')">🇬🇧 English</div><div class="opt" onclick="pickNative('it')">🇮🇹 Italiano</div><div class="opt" onclick="pickNative('fr')">🇫🇷 Français</div><div class="opt" onclick="pickNative('de')">🇩🇪 Deutsch</div><div class="opt" onclick="pickNative('ja')">🇯🇵 Japonés</div><button class="btn btn-ghost" onclick="showBox(0)">← Volver</button></div>
-  <div class="box" id="step2"><h3>¿Qué quieres aprender?</h3><div id="learnBox"></div><button class="btn btn-ghost" onclick="showBox(1)">← Volver</button></div>
+<header class="sticky top-0 bg-white/90 backdrop-blur-md px-4 py-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3"><div class="logo-fix">🌙</div><div><h1 class="font-bold text-[#6D28D9]">Gluna Lingua</h1><p class="text-[12px] text-gray-400 font-bold">KIDS 8.5</p></div></div>
+<button onclick="goHome()" class="bg-[#F3F0FF] text-[#6D28D9] px-4 py-2 rounded-full text-sm font-bold">🏠 Inicio</button>
+</header>
+<main class="max-w-[480px] mx-auto px-4 pb-24">
+<section id="view-home" class="pt-6">
+<h2 class="text-[28px] font-bold">¡Hola Gaddiel! 👋</h2><p class="text-gray-500 mb-6">¿Qué hacemos hoy?</p>
+<div class="grid gap-4">
+<button onclick="showLearn()" class="bg-gradient-to-br from-violet-600 to-indigo-600 rounded-[28px] p-6 text-left text-white shadow-xl"><p class="text-[32px]">📚</p><h3 class="text-[24px] font-bold">APRENDER</h3><p class="opacity-80">10 categorías</p></button>
+<button onclick="showNovela()" class="bg-gradient-to-br from-gray-900 to-gray-700 rounded-[28px] p-6 text-left text-white shadow-xl"><p class="text-[32px]">🌙</p><h3 class="text-[24px] font-bold">NOVELA PRO</h3><p class="opacity-70">Capítulo 1 GRATIS</p></button>
 </div>
-
-<div class="header">
-  <div style="display:flex;align-items:center;gap:10px"><div class="logo">🌙</div><div><b>Gluna Lingua</b><br><small id="hName" style="color:#8A8FA8;font-size:11px"></small></div></div>
-  <div style="display:flex;gap:8px;align-items:center"><div style="background:#FFF4CC;border:2px solid #FFD93D;border-radius:20px;padding:4px 10px;font-weight:700;font-size:13px">⭐ <span id="score">0</span></div><button onclick="openProfile()" style="border:none;background:#EEF0F7;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer">👤</button></div>
-</div>
-
-<div class="main">
-  <div id="levelMode">
-    <div style="text-align:center;margin:10px 0 16px"><div class="logo" style="width:56px;height:56px;margin:0 auto;font-size:32px">🌙</div><h3 style="margin-top:8px">¡Hola <span id="welcomeName">!</span> ¿Qué hacemos hoy?</h3><small style="color:#8A8FA8"><span id="nativeL"></span> → <span id="learnL"></span> • Perfil guarda progreso 👤</small></div>
-    <button class="big-card" onclick="goToAprender()"><div class="big-icon" style="background:linear-gradient(135deg,#6BCB77,#4D96FF)">📚</div><div><b style="font-size:16px">APRENDER</b><br><small style="color:#8A8FA8">10 categorías separadas: Frutas, Animales, Colores, Comida, Números, Abecedario, Casa, Ropa, Cuerpo, Básico</small><br><small style="color:#4D96FF;font-weight:700">GRATIS → Ver categorías</small></div></button>
-    <button class="big-card" onclick="goToNovela()"><div class="big-icon" style="background:linear-gradient(135deg,#1a1a2e,#845EC2)">🌙</div><div><b style="font-size:16px">NOVELA PRO</b><br><small style="color:#8A8FA8">Salva a Luna con historia interactiva 🦋🐝🐿️</small><br><small style="color:#10B981;font-weight:700">Cap 1 GRATIS →</small></div></button>
-  </div>
-
-  <div id="levelCats" style="display:none">
-    <button class="btn btn-ghost" style="width:auto;padding:8px 14px;margin-bottom:10px" onclick="goToMode()">← Inicio</button>
-    <h3>📚 Elige qué aprender</h3><p style="color:#8A8FA8;font-size:12px">SOLO categorías. Toca una para entrar a sus juegos</p>
-    <div class="cat-grid" id="catList"></div>
-  </div>
-
-  <div id="levelGames" style="display:none">
-    <button class="btn btn-ghost" style="width:auto;padding:8px 14px;margin-bottom:10px" onclick="goToCats()">← Categorías</button>
-    <h3>🎮 <span id="catIcon">🍎</span> <span id="catName">Frutas</span></h3><p style="color:#8A8FA8;font-size:12px">11 juegos de esta categoría • Audios por idioma corregidos</p>
-    <div class="game-grid">
-      <div class="game-card" onclick="openGame('cards')">🃏<br><b>Cartas PRO</b><br><small>3D + frase</small></div>
-      <div class="game-card" onclick="openGame('quiz')">🧩<br><b>Quiz</b></div>
-      <div class="game-card" onclick="openGame('truefalse')">✅❌<br><b>V/F</b></div>
-      <div class="game-card" onclick="openGame('memory')">🧠<br><b>Memoria</b><br><small>8 fijo</small></div>
-      <div class="game-card" onclick="openGame('listen')">👂<br><b>Escucha</b><br><small>Audio nativo</small></div>
-      <div class="game-card" onclick="openGame('repeat')">🎤<br><b>Repite</b><br><small>Obligatorio bien</small></div>
-      <div class="game-card" onclick="openGame('riddle')">🤔<br><b>Adivina</b></div>
-      <div class="game-card" onclick="openGame('spell')">🔤<br><b>Deletrea</b><br><small>Letras dispersas</small></div>
-      <div class="game-card" onclick="openGame('match')">🔗<br><b>Une</b></div>
-      <div class="game-card" onclick="openGame('speed')">⚡<br><b>Rápido</b></div>
-      <div class="game-card" onclick="openGame('story')">📖<br><b>Cuento PRO</b><br><small>En idioma + traducción</small></div>
-    </div>
-  </div>
-
-  <div id="levelNovela" style="display:none">
-    <button class="btn btn-ghost" style="width:auto;padding:8px 14px;margin-bottom:10px" onclick="goToMode()">← Inicio</button>
-    <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:22px;padding:18px;color:#fff;text-align:center"><div style="font-size:40px">🌙🦋🐝🐿️✨</div><h3>Novela PRO Interactiva</h3><p style="font-size:12px;opacity:.8">Con imágenes de animales reales y textos</p></div>
-    <button class="big-card" onclick="openNovel()"><div class="big-icon" style="background:linear-gradient(135deg,#FF6B6B,#FFD93D)">🍎</div><div><b>Cap 1: Valle Frutas GRATIS</b><br><small style="color:#10B981">Mariposas, abejas, ardillas + jefe Gusano 🐛</small></div><div style="margin-left:auto">▶️</div></button>
-    <button class="big-card" style="opacity:.6" onclick="showPremium()"><div class="big-icon" style="background:linear-gradient(135deg,#4D96FF,#845EC2)">🦁</div><div><b>Cap 2: Reino Animal 🔒 Premium</b><br><small>León, oso, tigre con ilustraciones</small></div><div style="margin-left:auto">🔒</div></button>
-  </div>
-</div>
-
-<div class="bottom-nav"><div class="nav-tab active" id="navMode" onclick="goToMode()">🏠 Inicio</div><div class="nav-tab" id="navCats" onclick="goToAprender()">📚 Aprender</div><div class="nav-tab" id="navNov" onclick="goToNovela()">🌙 Novela</div></div>
-
-<div id="gameModal"><div class="modal-header"><button class="btn btn-ghost" style="width:auto;padding:8px 14px" onclick="closeGame()">← Volver</button><b id="modalTitle"></b><div style="background:#FFF4CC;border-radius:20px;padding:4px 10px;font-size:13px">⭐ <span id="modalScore">0</span></div></div><div class="modal-body" id="modalBody"></div></div>
-
+</section>
+<section id="view-cats" class="hidden pt-6"><div class="flex gap-3 mb-4"><button onclick="goHome()" class="bg-white w-10 h-10 rounded-full shadow">←</button><h2 class="text-[22px] font-bold">Elige categoría</h2></div><div id="cats-grid" class="grid grid-cols-2 gap-3"></div></section>
+<section id="view-games" class="hidden pt-6"><div class="flex gap-3 mb-2"><button onclick="showLearn()" class="bg-white w-10 h-10 rounded-full shadow">←</button><h2 id="current-cat-name" class="text-[22px] font-bold"></h2></div><p id="current-cat-desc" class="text-sm text-gray-500 mb-4"></p><div id="games-grid" class="grid grid-cols-2 gap-3"></div><div id="play-area" class="hidden mt-6 bg-white rounded-[24px] p-5 shadow-xl"><div class="flex justify-between mb-4"><h3 id="play-title" class="font-bold"></h3><button onclick="closePlay()" class="text-sm bg-gray-100 px-3 py-1 rounded-full">✕</button></div><div id="play-content" class="min-h-[200px] flex flex-col items-center justify-center"></div></div></section>
+<section id="view-novela" class="hidden pt-6"><div class="flex gap-3 mb-4"><button onclick="goHome()" class="bg-white w-10 h-10 rounded-full shadow">←</button><h2 class="text-[22px] font-bold">🌙 Novela PRO</h2></div><div class="bg-white rounded-[24px] p-5 shadow border-2 border-violet-600"><span class="bg-violet-600 text-white text-[10px] px-2 py-1 rounded-full">GRATIS</span><h3 class="font-bold mt-2">Capítulo 1: El Despertar</h3><button class="mt-3 w-full bg-black text-white py-3 rounded-full font-bold">▶️ Jugar</button></div></section>
+</main>
 <script>
-var kidName='', kidAge=0, nativeLang='', learnLang='', curCat='fruits', curIdx=0, score=0, failed=[], queue=[], spellHint=0;
-var LANGS={es:{f:'🇪🇸',code:'es-ES'},en:{f:'🇬🇧',code:'en-US'},it:{f:'🇮🇹',code:'it-IT'},fr:{f:'🇫🇷',code:'fr-FR'},de:{f:'🇩🇪',code:'de-DE'},ja:{f:'🇯🇵',code:'ja-JP'}};
-var CATS=[{id:'fruits',name:'Frutas',icon:'🍎',color:'#FF6B6B',desc:'8 frutas'},{id:'animals',name:'Animales',icon:'🦁',color:'#4D96FF',desc:'Gato, perro, león'},{id:'colors',name:'Colores',icon:'🎨',color:'#845EC2',desc:'Rojo, azul'},{id:'food',name:'Comida',icon:'🍕',color:'#6BCB77',desc:'Leche, pan'},{id:'numbers',name:'Números',icon:'🔢',color:'#FF8C42',desc:'Uno, dos'},{id:'alphabet',name:'Abecedario',icon:'🔤',color:'#FF6B6B',desc:'A, B, C'},{id:'house',name:'Casa',icon:'🏠',color:'#4D96FF',desc:'Casa, cama'},{id:'clothes',name:'Ropa',icon:'👕',color:'#845EC2',desc:'Camisa'},{id:'body',name:'Cuerpo',icon:'🙌',color:'#6BCB77',desc:'Mano, ojo'},{id:'basic',name:'Básico',icon:'👋',color:'#FFD93D',desc:'Hola, me llamo, edad'}];
-var DB={fruits:[{en:'apple',es:'manzana',it:'mela',fr:'pomme',de:'Apfel',ja:'ringo',emoji:'🍎'},{en:'banana',es:'plátano',it:'banana',fr:'banane',de:'Banane',ja:'banana',emoji:'🍌'},{en:'orange',es:'naranja',it:'arancia',fr:'orange',de:'Orange',ja:'orenji',emoji:'🍊'},{en:'strawberry',es:'fresa',it:'fragola',fr:'fraise',de:'Erdbeere',ja:'ichigo',emoji:'🍓'}],animals:[{en:'cat',es:'gato',it:'gatto',fr:'chat',de:'Katze',ja:'neko',emoji:'🐱'},{en:'dog',es:'perro',it:'cane',fr:'chien',de:'Hund',ja:'inu',emoji:'🐶'}],colors:[{en:'red',es:'rojo',it:'rosso',fr:'rouge',de:'rot',ja:'akai',emoji:'🔴'}],food:[{en:'milk',es:'leche',it:'latte',fr:'lait',de:'Milch',ja:'miruku',emoji:'🥛'}],numbers:[{en:'one',es:'uno',it:'uno',fr:'un',de:'eins',ja:'ichi',emoji:'1️⃣'}],alphabet:[{en:'A',es:'A',it:'A',fr:'A',de:'A',ja:'A',emoji:'🅰️'}],house:[{en:'house',es:'casa',it:'casa',fr:'maison',de:'Haus',ja:'ie',emoji:'🏠'}],clothes:[{en:'shirt',es:'camisa',it:'camicia',fr:'chemise',de:'Hemd',ja:'shatsu',emoji:'👕'}],body:[{en:'hand',es:'mano',it:'mano',fr:'main',de:'Hand',ja:'te',emoji:'✋'}],basic:[{en:'hello',es:'hola',it:'ciao',fr:'bonjour',de:'hallo',ja:'konnichiwa',emoji:'👋'},{en:'my name is',es:'me llamo',it:'mi chiamo',fr:'je m appelle',de:'ich heiße',ja:'watashi wa',emoji:'😊'}]};
-
-function pickAge(a){kidAge=a; document.querySelectorAll('.age-opt').forEach(el=>el.classList.remove('sel')); document.getElementById('age'+a).classList.add('sel');}
-function showBox(n){document.getElementById('step0').style.display='none';document.getElementById('step1').style.display='none';document.getElementById('step2').style.display='none';document.getElementById('step'+n).style.display='flex';}
-function goStep1(){var inp=document.getElementById('kidName'); kidName=inp.value.trim()||'Elena'; if(!kidAge){alert('Toca tu edad'); return;} localStorage.setItem('gluna_name',kidName); localStorage.setItem('gluna_age',kidAge); document.getElementById('greetH').innerText='¡Hola '+kidName+'!'; showBox(1);}
-function pickNative(l){nativeLang=l; localStorage.setItem('gluna_native',l); buildLearn(); showBox(2);}
-function buildLearn(){var box=document.getElementById('learnBox'); box.innerHTML=''; for(var k in LANGS){if(k===nativeLang) continue; var d=document.createElement('div'); d.className='opt'; d.innerHTML=LANGS[k].f+' '+k.toUpperCase(); (function(lang){d.onclick=function(){learnLang=lang; localStorage.setItem('gluna_learn',lang); finishOnboard();};})(k); box.appendChild(d);}}
-function finishOnboard(){document.getElementById('onboarding').style.display='none'; initApp();}
-function initApp(){kidName=localStorage.getItem('gluna_name')||kidName; kidAge=parseInt(localStorage.getItem('gluna_age'))||kidAge; nativeLang=localStorage.getItem('gluna_native')||nativeLang; learnLang=localStorage.getItem('gluna_learn')||learnLang; score=parseInt(localStorage.getItem('gluna_score')||0); if(!kidName||!nativeLang||!learnLang){document.getElementById('onboarding').style.display='flex'; showBox(0); return;} document.getElementById('onboarding').style.display='none'; document.getElementById('welcomeName').innerText=kidName; document.getElementById('hName').innerText=kidName; document.getElementById('nativeL').innerText=nativeLang.toUpperCase(); document.getElementById('learnL').innerText=learnLang.toUpperCase(); document.getElementById('score').innerText=score; document.getElementById('modalScore').innerText=score; renderCats(); goToMode();}
-function renderCats(){var div=document.getElementById('catList'); div.innerHTML=''; CATS.forEach(function(c){var card=document.createElement('div'); card.className='cat-card'; card.innerHTML='<div style="width:100%;height:52px;border-radius:12px;background:'+c.color+'22;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:6px">'+c.icon+'</div><b>'+c.name+'</b><br><small style=color:#8A8FA8>'+c.desc+'</small>'; card.onclick=function(){selectCat(c.id);}; div.appendChild(card);});}
-function goToMode(){document.getElementById('levelMode').style.display='block'; document.getElementById('levelCats').style.display='none'; document.getElementById('levelGames').style.display='none'; document.getElementById('levelNovela').style.display='none'; document.getElementById('navMode').classList.add('active'); document.getElementById('navCats').classList.remove('active'); document.getElementById('navNov').classList.remove('active');}
-function goToAprender(){document.getElementById('levelMode').style.display='none'; document.getElementById('levelCats').style.display='block'; document.getElementById('levelGames').style.display='none'; document.getElementById('levelNovela').style.display='none'; document.getElementById('navCats').classList.add('active'); document.getElementById('navMode').classList.remove('active'); document.getElementById('navNov').classList.remove('active');}
-function goToCats(){goToAprender();}
-function selectCat(id){curCat=id; var cat=CATS.find(c=>c.id===id); document.getElementById('catName').innerText=cat.name; document.getElementById('catIcon').innerText=cat.icon; document.getElementById('levelCats').style.display='none'; document.getElementById('levelGames').style.display='block';}
-function goToNovela(){document.getElementById('levelMode').style.display='none'; document.getElementById('levelCats').style.display='none'; document.getElementById('levelGames').style.display='none'; document.getElementById('levelNovela').style.display='block'; document.getElementById('navNov').classList.add('active'); document.getElementById('navMode').classList.remove('active'); document.getElementById('navCats').classList.remove('active');}
-function openProfile(){var d=document.createElement('div'); d.className='profile-modal'; d.innerHTML='<div class="box active" style="display:flex"><h3>👤 Perfil de '+kidName+'</h3><p style="font-size:13px;color:#8A8FA8">Nombre: '+kidName+'<br>Edad: '+kidAge+'<br>'+nativeLang.toUpperCase()+' → '+learnLang.toUpperCase()+'<br>⭐ '+score+' guardado</p><input id="newName" value="'+kidName+'" style="width:100%;padding:10px;border:2px solid #EEF0F7;border-radius:10px"><button class="btn" onclick="saveProf()">Guardar ✅</button><button class="btn btn-ghost" onclick="this.closest(\'.profile-modal\').remove()">Cerrar</button></div>'; document.body.appendChild(d); d.onclick=function(e){if(e.target===d) d.remove();};}
-function saveProf(){var nn=document.getElementById('newName').value.trim(); if(nn){kidName=nn; localStorage.setItem('gluna_name',nn);} initApp(); document.querySelector('.profile-modal').remove();}
-function showPremium(){var d=document.createElement('div'); d.className='profile-modal'; d.innerHTML='<div class="box active" style="display:flex;text-align:center"><div style="font-size:50px">🔒</div><h3>Premium 4.99€</h3><button class="btn" onclick="this.closest(\'.profile-modal\').remove()">Cerrar</button></div>'; document.body.appendChild(d);}
-function openGame(g){curIdx=0; failed=[]; queue=[...(DB[curCat]||DB.fruits)]; document.getElementById('gameModal').classList.add('active'); document.getElementById('modalTitle').innerText=g+' - '+curCat; window.curGame=g; spellHint=0; renderGame();}
-function closeGame(){document.getElementById('gameModal').classList.remove('active');}
-function getItem(){if(window.curGame==='quiz') return queue[curIdx]; return (DB[curCat]||DB.fruits)[curIdx % (DB[curCat]||DB.fruits).length];}
-function t(i){return i[learnLang]||i.en;} function tn(i){return i[nativeLang]||i.es;}
-function speak(w){speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(w); u.lang=LANGS[learnLang].code; var vs=speechSynthesis.getVoices(); var b=vs.find(v=>v.lang===u.lang); if(b) u.voice=b; u.rate=0.7; speechSynthesis.speak(u);}
-function addScore(n){score+=n; if(score<0) score=0; localStorage.setItem('gluna_score',score); document.getElementById('score').innerText=score; document.getElementById('modalScore').innerText=score;}
-function next(){curIdx++; if(window.curGame==='quiz'){if(curIdx>=queue.length){if(failed.length>0){queue=[...failed]; failed=[]; curIdx=0; document.getElementById('modalBody').innerHTML='<h3>Repaso</h3><button class="btn" onclick="renderGame()">Vamos</button>'; return;} else {document.getElementById('modalBody').innerHTML='<h3>¡Perfecto!</h3><button class="btn" onclick="closeGame()">Menú</button>'; return;}}} renderGame();}
-function openNovel(){openGame('story');}
-function renderGame(){var body=document.getElementById('modalBody'); var item=getItem(); var g=window.curGame;
- if(g==='spell'){
-   var word=t(item);
-   body.innerHTML='<div style="width:100%;text-align:center"><div style="font-size:50px">'+item.emoji+'</div><p>Ordena <b>'+tn(item)+'</b> en '+learnLang.toUpperCase()+'</p><small style=color:#8A8FA8>Solo letras desordenadas, sin pista completa</small><div id="ans" style="min-height:44px;border:2px dashed #4D96FF;border-radius:10px;margin:10px 0;padding:6px;display:flex;flex-wrap:wrap;justify-content:center;background:#EAF1FF"></div><div id="lets" style="display:flex;flex-wrap:wrap;justify-content:center"></div><div style="margin-top:10px"><button class="btn btn-ghost" style="width:auto" onclick="speak(\''+word+'\')">🔊</button> <button class="btn" style="width:auto" onclick="checkSpell(\''+word+'\')">Comprobar</button> <button class="btn" style="width:auto;background:#FFF4CC;color:#000" onclick="buyHint(\''+word+'\')">💡 5⭐ (1 letra)</button></div><div id="feed"></div></div>';
-   var cont=document.getElementById('lets'); var ans=document.getElementById('ans'); var letters=word.slice(spellHint).split('').sort(()=>Math.random()-.5);
-   if(spellHint>0){for(var i=0;i<spellHint;i++){var s=document.createElement('div'); s.className='letter-tile'; s.style.background='#D1FAE5'; s.innerText=word[i]; s.dataset.fixed='1'; ans.appendChild(s);}}
-   letters.forEach(function(l){var s=document.createElement('div'); s.className='letter-tile'; s.innerText=l; s.onclick=function(){ans.appendChild(s);}; cont.appendChild(s);});
-   ans.onclick=function(e){if(e.target.classList.contains('letter-tile')&&!e.target.dataset.fixed){cont.appendChild(e.target);}};
- } else if(g==='story'){
-   var items=(DB[curCat]||DB.fruits).slice(0,3);
-   var txt='Había una vez '+kidName+'... Compró ___ '+items[0].emoji;
-   if(learnLang==='it') txt='C\'era una volta '+kidName+'... Comprò ___ '+items[0].emoji;
-   if(learnLang==='en') txt='Once '+kidName+'... Bought ___ '+items[0].emoji;
-   body.innerHTML='<div style="width:100%"><div style="background:#fff;border-radius:12px;padding:12px"><h4>📖 Cuento en '+learnLang.toUpperCase()+' ('+LANGS[learnLang].code+')</h4><div style="background:#F5F7FF;padding:10px;border-radius:8px;margin:8px 0">'+txt.replace(/___/g,'<span class="blank" style="border-bottom:2px dashed #4D96FF;min-width:60px;display:inline-block;text-align:center">___</span>')+'</div><div style="background:#FFF4CC;padding:8px;border-radius:8px;font-size:12px"><b>Traducción '+nativeLang.toUpperCase()+':</b> '+items.map(function(it){return it.emoji+' = '+tn(it)+' ('+t(it)+')';}).join(' • ')+'</div></div><div id="opts" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"></div></div>';
-   var o=document.getElementById('opts'); items.forEach(function(it){var b=document.createElement('button'); b.className='tf-btn'; b.style.width='auto'; b.innerText=t(it)+' '+it.emoji; b.onclick=function(){var blanks=document.querySelectorAll('.blank'); for(var bl of blanks){if(bl.innerText==='___'){bl.innerText=t(it); bl.style.color='#10B981'; b.disabled=true; break;}}}}; o.appendChild(b);});
- } else {
-   body.innerHTML='<div style="text-align:center"><div style="font-size:60px">'+item.emoji+'</div><b>'+t(item)+'</b><br><small>'+tn(item)+'</small><br><br><button class="btn btn-ghost" style="width:auto" onclick="speak(\''+t(item)+'\')">🔊 '+LANGS[learnLang].code+'</button> <button class="btn" style="width:auto" onclick="next()">→</button></div>';
- }
-}
-function buyHint(w){if(score<5){alert('Necesitas 5⭐'); return;} score-=5; localStorage.setItem('gluna_score',score); document.getElementById('score').innerText=score; spellHint++; renderGame();}
-function checkSpell(c){var ans=[...document.getElementById('ans').children].map(function(x){return x.innerText;}).join(''); var f=document.getElementById('feed'); if(ans.toLowerCase()===c.toLowerCase()){f.innerText='✅ ¡Bien!'; addScore(10); setTimeout(next,800);} else {f.innerText='❌ Es '+c;}}
-
-(function(){var s=localStorage.getItem('gluna_name'), n=localStorage.getItem('gluna_native'), l=localStorage.getItem('gluna_learn'); if(s&&n&&l){initApp();} else {document.getElementById('onboarding').style.display='flex'; showBox(0);}})();
+const CATS=[{id:'frutas',name:'Frutas',icon:'🍎',color:'from-red-400 to-orange-400',words:[['Apple','Manzana'],['Banana','Plátano'],['Orange','Naranja'],['Strawberry','Fresa'],['Grape','Uva']]},{id:'animales',name:'Animales',icon:'🦁',color:'from-amber-400 to-yellow-400',words:[['Dog','Perro'],['Cat','Gato'],['Lion','León']]},{id:'colores',name:'Colores',icon:'🎨',color:'from-violet-400 to-purple-400',words:[['Red','Rojo'],['Blue','Azul'],['Green','Verde']]},{id:'comida',name:'Comida',icon:'🍕',color:'from-orange-400 to-red-400',words:[['Pizza','Pizza'],['Water','Agua']]},{id:'numeros',name:'Números',icon:'🔢',color:'from-blue-400 to-cyan-400',words:[['One','Uno'],['Two','Dos']]},{id:'abecedario',name:'Abecedario',icon:'🔤',color:'from-emerald-400 to-teal-400',words:[['A','A'],['B','Be']]},{id:'casa',name:'Casa',icon:'🏠',color:'from-slate-400 to-gray-400',words:[['House','Casa'],['Door','Puerta']]},{id:'ropa',name:'Ropa',icon:'👕',color:'from-pink-400 to-rose-400',words:[['Shirt','Camisa']]},{id:'cuerpo',name:'Cuerpo',icon:'🙌',color:'from-orange-300 to-amber-300',words:[['Hand','Mano']]},{id:'basico',name:'Básico',icon:'👋',color:'from-indigo-400 to-violet-400',words:[['Hello','Hola']]}];
+const GAMES=[{id:'cartas',name:'Cartas PRO',icon:'🃏',desc:'Flashcards'},{id:'quiz',name:'Quiz',icon:'🧩',desc:'Elige'},{id:'vf',name:'V / F',icon:'✅❌',desc:'Verdadero'},{id:'memoria',name:'Memoria',icon:'🧠',desc:'Parejas'},{id:'escucha',name:'Escucha',icon:'👂',desc:'Audio'},{id:'repite',name:'Repite',icon:'🎤',desc:'Voz'},{id:'deletrea',name:'Deletrea',icon:'🔤',desc:'Spell'},{id:'ordena',name:'Ordena',icon:'🔀',desc:'Orden'},{id:'completa',name:'Completa',icon:'✍️',desc:'Fill'},{id:'asocia',name:'Asocia',icon:'🔗',desc:'Match'},{id:'escribe',name:'Escribe',icon:'⌨️',desc:'Write'}];
+let currentCat=null;
+function hideAll(){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'))}
+function goHome(){hideAll();document.getElementById('view-home').classList.remove('hidden')}
+function showLearn(){hideAll();document.getElementById('view-cats').classList.remove('hidden');const g=document.getElementById('cats-grid');g.innerHTML='';CATS.forEach(c=>{g.innerHTML+=`<button onclick="openCat('${c.id}')" class="bg-gradient-to-br ${c.color} rounded-[20px] p-4 text-left text-white shadow"><div class="text-[32px]">${c.icon}</div><h3 class="font-bold">${c.name}</h3></button>`})}
+function showNovela(){hideAll();document.getElementById('view-novela').classList.remove('hidden')}
+function openCat(id){currentCat=CATS.find(x=>x.id===id);hideAll();document.getElementById('view-games').classList.remove('hidden');document.getElementById('current-cat-name').innerText=currentCat.icon+' '+currentCat.name;document.getElementById('current-cat-desc').innerText='11 juegos solo de '+currentCat.name;const grid=document.getElementById('games-grid');grid.innerHTML='';GAMES.forEach(g=>{grid.innerHTML+=`<button onclick="playGame('${g.id}')" class="bg-white rounded-[20px] p-3 text-left shadow"><div>${g.icon}</div><div class="font-bold text-sm">${g.name}</div><div class="text-[10px] text-gray-400">${currentCat.name}</div></button>`});document.getElementById('play-area').classList.add('hidden')}
+function playGame(gid){const w=currentCat.words[Math.floor(Math.random()*currentCat.words.length)];document.getElementById('play-area').classList.remove('hidden');document.getElementById('play-title').innerText=gid+' - '+currentCat.name;document.getElementById('play-content').innerHTML=`<div class="text-center"><div class="text-[64px]">${currentCat.icon}</div><h2 class="text-3xl font-bold">${w[0]}</h2><p class="text-xl text-violet-600 font-bold">${w[1]}</p><button onclick="playGame('${gid}')" class="mt-4 bg-violet-600 text-white px-6 py-2 rounded-full">Siguiente →</button></div>`}
+function closePlay(){document.getElementById('play-area').classList.add('hidden')}
+goHome();
 </script>
 </body>
 </html>
