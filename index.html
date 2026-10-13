@@ -5,7 +5,7 @@ index.html
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gluna Lingua Kids 4.0</title>
+<title>Gluna Lingua Kids 4.1</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--r:linear-gradient(90deg,#FF6B6B,#FFD93D,#6BCB77,#4D96FF,#845EC2)}
@@ -14,20 +14,18 @@ index.html
 .logo{display:flex;align-items:center;gap:8px}.logo img{width:40px;height:40px;border-radius:50%}
 .badge{background:#FFF4CC;border:2px solid #FFD93D;border-radius:20px;padding:4px 12px;font-weight:700}
 .onboarding{position:fixed;inset:0;background:#F8FBFF;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;overflow-y:auto}
-.onboard-card{background:#fff;border-radius:28px;padding:28px;box-shadow:0 12px 32px rgba(0,0,0,.1);max-width:380px;width:100%;animation:popIn.3s}
+.onboard-card{background:#fff;border-radius:28px;padding:28px;box-shadow:0 12px 32px rgba(0,0,0,.1);max-width:380px;width:100%}
 .lang-opt{border:2px solid #ECEFF5;border-radius:16px;padding:14px;margin:8px 0;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:18px;font-weight:600;transition:.2s}
-.lang-opt:hover{border-color:#4D96FF;background:#E8F0FE;transform:scale(1.02)}
-.lang-opt span{font-size:32px}
+.lang-opt.selected{border-color:#4D96FF!important;background:#E8F0FE!important;transform:scale(1.03);box-shadow:0 4px 12px rgba(77,150,255,.2)}
+.age-opt{border:2px solid #ECEFF5;border-radius:14px;padding:12px;cursor:pointer;font-weight:700;transition:.2s}
+.age-opt.selected{border-color:#4D96FF!important;background:#E8F0FE!important;transform:scale(1.05)}
 .btn-main{background:var(--r);color:#fff;border:none;padding:14px 28px;border-radius:16px;font-weight:700;font-size:16px;cursor:pointer;width:100%;margin-top:16px}
-.btn-ghost{background:transparent;border:none;color:#8A8FA8;font-weight:600;margin-top:10px;cursor:pointer}
+.btn-ghost{background:transparent;border:none;color:#8A8FA8;font-weight:600;margin-top:12px;cursor:pointer}
 .input-name{width:100%;padding:14px;border:2px solid #ECEFF5;border-radius:14px;font-size:18px;font-family:Fredoka;text-align:center;margin:8px 0}
-.input-name:focus{border-color:#4D96FF;outline:none}
 .age-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
-.age-opt{border:2px solid #ECEFF5;border-radius:14px;padding:10px;cursor:pointer;font-weight:700}
-.age-opt.selected{border-color:#4D96FF;background:#E8F0FE}
 .main{max-width:440px;margin:0 auto;padding:16px}
 .cats{display:flex;gap:8px;overflow-x:auto;padding:8px 0}.cat{border:none;padding:8px 14px;border-radius:20px;font-weight:600;white-space:nowrap;opacity:.7;cursor:pointer}.cat.active{opacity:1;color:#fff;transform:scale(1.05)}
-.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.game-card{background:#fff;border-radius:20px;padding:14px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.06);cursor:pointer;border:2px solid transparent}
+.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.game-card{background:#fff;border-radius:20px;padding:14px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.06);cursor:pointer}
 #gameModal{position:fixed;inset:0;background:#F8FBFF;z-index:50;display:none;flex-direction:column}#gameModal.active{display:flex}
 .modal-header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .modal-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:440px;margin:0 auto;width:100%}
@@ -37,13 +35,11 @@ index.html
 .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:340px}.mem-card{aspect-ratio:1;background:#fff;border:2px solid #ECEFF5;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer}.mem-card.flipped{background:#FFF4CC;border-color:#FFD93D}.mem-card.matched{background:#D1FAE5;border-color:#6BCB77;opacity:.6}
 .input-spell{width:100%;max-width:280px;padding:14px;border:2px solid #4D96FF;border-radius:14px;font-size:20px;text-align:center;font-family:Fredoka;margin:12px 0}
 .balloon{position:fixed;bottom:-100px;font-size:50px;animation:floatUp linear forwards;cursor:pointer;z-index:200}
-@keyframes floatUp{to{transform:translateY(-120vh) rotate(20deg)}}.celebrate-text{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:24px 32px;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.2);text-align:center;z-index:300;animation:popIn.4s}
-@keyframes popIn{0%{transform:translate(-50%,-50%) scale(0)}100%{transform:translate(-50%,-50%) scale(1)}}
+@keyframes floatUp{to{transform:translateY(-120vh) rotate(20deg)}}.celebrate-text{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:24px 32px;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,.2);text-align:center;z-index:300}
 </style>
 </head>
 <body>
 <div id="onboarding" class="onboarding">
-  <!-- PASO 0: NOMBRE Y EDAD -->
   <div class="onboard-card" id="step0">
     <h2>¡Hola! 🌈</h2><p style="color:#8A8FA8;margin:8px 0">¿Cómo te llamas?</p>
     <input id="kidName" class="input-name" placeholder="Ej: Sofia" maxlength="15">
@@ -55,16 +51,14 @@ index.html
     </div>
     <button class="btn-main" onclick="goStep1()">Continuar →</button>
   </div>
-  <!-- PASO 1: IDIOMA NATIVO -->
   <div class="onboard-card" id="step1" style="display:none">
     <h2 id="greetName">¡Hola! 🌈</h2><p style="color:#8A8FA8">¿Qué idioma hablas en casa?</p>
-    <div class="lang-opt" onclick="selectNative('es')"><span>🇪🇸</span> Español</div>
-    <div class="lang-opt" onclick="selectNative('en')"><span>🇬🇧</span> English</div>
-    <div class="lang-opt" onclick="selectNative('it')"><span>🇮🇹</span> Italiano</div>
-    <div class="lang-opt" onclick="selectNative('fr')"><span>🇫🇷</span> Français</div>
+    <div class="lang-opt" data-lang="es" onclick="selectNative('es')"><span>🇪🇸</span> Español</div>
+    <div class="lang-opt" data-lang="en" onclick="selectNative('en')"><span>🇬🇧</span> English</div>
+    <div class="lang-opt" data-lang="it" onclick="selectNative('it')"><span>🇮🇹</span> Italiano</div>
+    <div class="lang-opt" data-lang="fr" onclick="selectNative('fr')"><span>🇫🇷</span> Français</div>
     <button class="btn-ghost" onclick="goBack(0)">← Retroceder</button>
   </div>
-  <!-- PASO 2: IDIOMA A APRENDER -->
   <div class="onboard-card" id="step2" style="display:none">
     <h2>¡Genial! 🚀</h2><p style="color:#8A8FA8">¿Qué idioma quieres aprender?</p>
     <div id="learnOpts"></div>
@@ -93,18 +87,70 @@ index.html
 <script>
 const DB={fruits:[{en:'apple',es:'manzana',it:'mela',fr:'pomme',emoji:'🍎'},{en:'banana',es:'plátano',it:'banana',fr:'banane',emoji:'🍌'},{en:'orange',es:'naranja',it:'arancia',fr:'orange',emoji:'🍊'},{en:'strawberry',es:'fresa',it:'fragola',fr:'fraise',emoji:'🍓'},{en:'cherry',es:'cereza',it:'ciliegia',fr:'cerise',emoji:'🍒'},{en:'grape',es:'uva',it:'uva',fr:'raisin',emoji:'🍇'},{en:'watermelon',es:'sandía',it:'anguria',fr:'pastèque',emoji:'🍉'},{en:'pineapple',es:'piña',it:'ananas',fr:'ananas',emoji:'🍍'}],animals:[{en:'cat',es:'gato',it:'gatto',fr:'chat',emoji:'🐱'},{en:'dog',es:'perro',it:'cane',fr:'chien',emoji:'🐶'},{en:'lion',es:'león',it:'leone',fr:'lion',emoji:'🦁'},{en:'bear',es:'oso',it:'orso',fr:'ours',emoji:'🐻'}],colors:[{en:'red',es:'rojo',it:'rosso',fr:'rouge',emoji:'🔴'},{en:'blue',es:'azul',it:'blu',fr:'bleu',emoji:'🔵'},{en:'yellow',es:'amarillo',it:'giallo',fr:'jaune',emoji:'🟡'},{en:'green',es:'verde',it:'verde',fr:'vert',emoji:'🟢'}],food:[{en:'milk',es:'leche',it:'latte',fr:'lait',emoji:'🥛'},{en:'bread',es:'pan',it:'pane',fr:'pain',emoji:'🍞'},{en:'cheese',es:'queso',it:'formaggio',fr:'fromage',emoji:'🧀'},{en:'pizza',es:'pizza',it:'pizza',fr:'pizza',emoji:'🍕'}]};
 const CONGRATS={es:'¡Felicidades!',en:'Congratulations!',it:'Complimenti!',fr:'Félicitations!'};
-const LANGS={es:{flag:'🇪🇸',name:'Español'},en:{flag:'🇬🇧',name:'Inglés / English'},it:{flag:'🇮🇹',name:'Italiano'},fr:{flag:'🇫🇷',name:'Français'}};
-let kidName=localStorage.getItem('gluna_name')||'', kidAge=parseInt(localStorage.getItem('gluna_age'))||0), nativeLang=localStorage.getItem('gluna_native')||'', learnLang=localStorage.getItem('gluna_learn')||'', curCat='fruits', curGame='cards', curIndex=0, score=0, streak=0, memState={};
-function selectAge(a){kidAge=a; document.querySelectorAll('.age-opt').forEach(e=>e.classList.toggle('selected', parseInt(e.dataset.age)===a));}
-function goStep1(){kidName=document.getElementById('kidName').value.trim()||'Campeón'; if(!kidAge){alert('Elige tu edad');return;} localStorage.setItem('gluna_name',kidName); localStorage.setItem('gluna_age',kidAge); document.getElementById('step0').style.display='none'; document.getElementById('step1').style.display='block'; document.getElementById('greetName').textContent=`¡Hola ${kidName}! 🌈`; }
-function goBack(s){document.getElementById('step1').style.display=s===0?'block':'none'; document.getElementById('step2').style.display=s===1?'block':'none'; document.getElementById('step0').style.display=s===0?'block':'none'; if(s===0)document.getElementById('step1').style.display='none';}
-function selectNative(l){nativeLang=l; localStorage.setItem('gluna_native',l); renderLearnOpts(); document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';}
-function renderLearnOpts(){let div=document.getElementById('learnOpts'); div.innerHTML=''; Object.keys(LANGS).forEach(k=>{if(k===nativeLang)return; let d=document.createElement('div'); d.className='lang-opt'; d.innerHTML=`<span>${LANGS[k].flag}</span> ${LANGS[k].name}`; d.onclick=()=>selectLearn(k); div.appendChild(d);});}
-function selectLearn(l){learnLang=l; localStorage.setItem('gluna_learn',l); document.getElementById('onboarding').style.display='none'; init();}
+const LANGS={es:{flag:'🇪🇸',name:'Español'},en:{flag:'🇬🇧',name:'English'},it:{flag:'🇮🇹',name:'Italiano'},fr:{flag:'🇫🇷',name:'Français'}};
+let kidName=localStorage.getItem('gluna_name')||'', kidAge=parseInt(localStorage.getItem('gluna_age'))||0, nativeLang=localStorage.getItem('gluna_native')||'', learnLang=localStorage.getItem('gluna_learn')||'', curCat='fruits', curIndex=0, score=0, streak=0, memState={};
+
+function selectAge(a){
+  kidAge=a;
+  document.querySelectorAll('.age-opt').forEach(e=>{
+    e.classList.toggle('selected', parseInt(e.dataset.age)===a);
+  });
+}
+function goStep1(){
+  kidName=document.getElementById('kidName').value.trim()||'Campeón';
+  if(!kidAge){alert('Elige tu edad tocando 🧸 🎒 o 🚀');return;}
+  localStorage.setItem('gluna_name',kidName);
+  localStorage.setItem('gluna_age',kidAge);
+  document.getElementById('step0').style.display='none';
+  document.getElementById('step1').style.display='block';
+  document.getElementById('greetName').textContent=`¡Hola ${kidName}! 🌈`;
+}
+function goBack(s){
+  if(s===0){document.getElementById('step1').style.display='none'; document.getElementById('step0').style.display='block';}
+  if(s===1){document.getElementById('step2').style.display='none'; document.getElementById('step1').style.display='block';}
+}
+function selectNative(l){
+  nativeLang=l;
+  document.querySelectorAll('#step1.lang-opt').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.lang===l);
+  });
+  localStorage.setItem('gluna_native',l);
+  setTimeout(()=>{
+    renderLearnOpts();
+    document.getElementById('step1').style.display='none';
+    document.getElementById('step2').style.display='block';
+  },350);
+}
+function renderLearnOpts(){
+  let div=document.getElementById('learnOpts'); div.innerHTML='';
+  Object.keys(LANGS).forEach(k=>{
+    if(k===nativeLang) return;
+    let d=document.createElement('div'); d.className='lang-opt'; d.dataset.lang=k;
+    d.innerHTML=`<span>${LANGS[k].flag}</span> ${LANGS[k].name}`;
+    d.onclick=()=>selectLearn(k);
+    div.appendChild(d);
+  });
+}
+function selectLearn(l){
+  learnLang=l;
+  document.querySelectorAll('#step2.lang-opt').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.lang===l);
+  });
+  localStorage.setItem('gluna_learn',l);
+  setTimeout(()=>{
+    document.getElementById('onboarding').style.display='none';
+    init();
+  },350);
+}
 function resetLang(){localStorage.clear(); location.reload();}
-function init(){if(kidName&&kidAge&&nativeLang&&learnLang)document.getElementById('onboarding').style.display='none'; document.getElementById('welcome').textContent=kidName?`Hola ${kidName} (${kidAge}a)`:''; document.getElementById('nativeLabel').textContent=nativeLang.toUpperCase(); document.getElementById('learnLabel').textContent=learnLang.toUpperCase();}
+function init(){
+  if(kidName&&kidAge&&nativeLang&&learnLang) document.getElementById('onboarding').style.display='none';
+  document.getElementById('welcome').textContent=kidName?`Hola ${kidName} (${kidAge}a)`:'';
+  document.getElementById('nativeLabel').textContent=nativeLang.toUpperCase();
+  document.getElementById('learnLabel').textContent=learnLang.toUpperCase();
+}
 function setCat(c){curCat=c; document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('active', b.dataset.c===c));}
-function openGame(g){curGame=g; curIndex=0; document.getElementById('gameModal').classList.add('active'); document.getElementById('modalTitle').textContent=g.toUpperCase(); renderGame();}
+function openGame(g){curIndex=0; document.getElementById('gameModal').classList.add('active'); document.getElementById('modalTitle').textContent=g.toUpperCase(); window.curGame=g; renderGame();}
 function closeGame(){document.getElementById('gameModal').classList.remove('active');}
 function getItem(){return DB[curCat][curIndex % DB[curCat].length];}
 function t(i){return i[learnLang]||i.en;} function tNative(i){return i[nativeLang]||i.es;}
@@ -115,12 +161,13 @@ function addScore(n){score+=n; if(n>0)streak++; else streak=0; document.getEleme
 function next(){curIndex=(curIndex+1)%DB[curCat].length; renderGame();}
 function renderGame(){
  const body=document.getElementById('modalBody'); const item=getItem(); let difficulty=kidAge<=5?2:kidAge<=8?3:4;
- if(curGame==='cards'){body.innerHTML=`<div style="font-size:80px;margin:10px 0">${item.emoji}</div><div style="font-size:32px;font-weight:700">${t(item)}</div><div style="color:#8A8FA8">${tNative(item)}</div><div style="display:flex;gap:10px;margin-top:16px"><button class="btn btn-blue" onclick="speak('${t(item)}')">🔊</button><button class="btn btn-rainbow" onclick="next()">Siguiente →</button></div>`;}
- else if(curGame==='quiz'){let count=difficulty+1; let opts=[item]; while(opts.length<count){let r=DB[curCat][Math.floor(Math.random()*DB[curCat].length)]; if(!opts.includes(r))opts.push(r);} opts.sort(()=>Math.random()-.5); body.innerHTML=`<p>¿Cómo se dice <b>${tNative(item)}</b>?</p><div style="font-size:50px;margin:8px 0">${item.emoji}</div><div id="opts" style="width:100%"></div>`; let d=document.getElementById('opts'); opts.forEach(o=>{let b=document.createElement('button'); b.className='tf-btn'; b.textContent=t(o); b.onclick=()=>{if(o===item){b.classList.add('correct'); celebrate(); setTimeout(next,1500);} else b.classList.add('wrong');}; d.appendChild(b);});}
- else if(curGame==='truefalse'){let isTrue=Math.random()>0.5; let fake=isTrue?item:DB[curCat][Math.floor(Math.random()*DB[curCat].length)]; body.innerHTML=`<h3>¿Esto es correcto?</h3><div style="font-size:80px;margin:10px 0">${fake.emoji}</div><div style="font-size:22px">¿Esto es <b>${t(item)}</b>?</div><div style="width:100%;margin-top:16px"><button class="tf-btn" style="background:#D1FAE5" onclick="checkTF(${isTrue},true)">✅ Verdadero</button><button class="tf-btn" style="background:#FEE2E2" onclick="checkTF(${isTrue},false)">❌ Falso</button></div>`;}
- else if(curGame==='memory'){let pool=DB[curCat].slice(0,difficulty); let cards=[]; pool.forEach(p=>{cards.push({...p,type:'emoji',id:p.en}); cards.push({...p,type:'text',id:p.en});}); cards.sort(()=>Math.random()-.5); memState={first:null,second:null,matched:0,lock:false}; body.innerHTML=`<h3>🧠 Memoria</h3><p style="color:#8A8FA8">Encuentra ${pool.length} parejas</p><div class="memory-grid" id="memGrid" style="grid-template-columns:repeat(${difficulty===2?2:4},1fr)"></div>`; let grid=document.getElementById('memGrid'); cards.forEach(c=>{let d=document.createElement('div'); d.className='mem-card'; d.dataset.id=c.id; d.textContent='❓'; d.onclick=()=>flipCard(d,c); grid.appendChild(d);});}
- else if(curGame==='listen'){body.innerHTML=`<h3>👂 Escucha</h3><button class="btn btn-blue" style="font-size:24px;padding:20px" onclick="speak('${t(item)}')">🔊 Escuchar</button><p style="margin:12px 0;color:#8A8FA8">¿Qué escuchaste?</p><div id="listenOpts" style="width:100%"></div>`; speak(t(item)); let opts=[item]; while(opts.length<(difficulty+1)){let r=DB[curCat][Math.floor(Math.random()*DB[curCat].length)]; if(!opts.includes(r))opts.push(r);} opts.sort(()=>Math.random()-.5); let d=document.getElementById('listenOpts'); opts.forEach(o=>{let b=document.createElement('button'); b.className='tf-btn'; b.textContent=o.emoji+' '+t(o); b.onclick=()=>{if(o===item){b.classList.add('correct'); celebrate(); setTimeout(next,1500);} else b.classList.add('wrong');}; d.appendChild(b);});}
- else if(curGame==='spell'){if(kidAge<=5){body.innerHTML=`<div style="font-size:80px">${item.emoji}</div><p style="color:#8A8FA8">Para peques, mira y escucha</p><div style="font-size:32px;font-weight:700">${t(item)}</div><button class="btn btn-blue" onclick="speak('${t(item)}')">🔊</button><button class="btn btn-rainbow" onclick="next()" style="margin-top:10px">Siguiente →</button>`;} else {body.innerHTML=`<div style="font-size:80px">${item.emoji}</div><p>Escribe <b>${tNative(item)}</b> en ${learnLang.toUpperCase()}</p><input id="spellInput" class="input-spell" placeholder="Escribe..."><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-blue" onclick="speak('${t(item)}')">🔊</button><button class="btn btn-rainbow" onclick="checkSpell()">Comprobar ✅</button></div><div id="spellFeed"></div>`; setTimeout(()=>{let el=document.getElementById('spellInput'); if(el)el.focus();},100);}}
+ let g=window.curGame||'cards';
+ if(g==='cards'){body.innerHTML=`<div style="font-size:80px;margin:10px 0">${item.emoji}</div><div style="font-size:32px;font-weight:700">${t(item)}</div><div style="color:#8A8FA8">${tNative(item)}</div><div style="display:flex;gap:10px;margin-top:16px"><button class="btn btn-blue" onclick="speak('${t(item)}')">🔊</button><button class="btn btn-rainbow" onclick="next()">Siguiente →</button></div>`;}
+ else if(g==='quiz'){let count=difficulty+1; let opts=[item]; while(opts.length<count){let r=DB[curCat][Math.floor(Math.random()*DB[curCat].length)]; if(!opts.includes(r))opts.push(r);} opts.sort(()=>Math.random()-.5); body.innerHTML=`<p>¿Cómo se dice <b>${tNative(item)}</b>?</p><div style="font-size:50px;margin:8px 0">${item.emoji}</div><div id="opts" style="width:100%"></div>`; let d=document.getElementById('opts'); opts.forEach(o=>{let b=document.createElement('button'); b.className='tf-btn'; b.textContent=t(o); b.onclick=()=>{if(o===item){b.classList.add('correct'); celebrate(); setTimeout(next,1500);} else b.classList.add('wrong');}; d.appendChild(b);});}
+ else if(g==='truefalse'){let isTrue=Math.random()>0.5; let fake=isTrue?item:DB[curCat][Math.floor(Math.random()*DB[curCat].length)]; body.innerHTML=`<h3>¿Esto es correcto?</h3><div style="font-size:80px;margin:10px 0">${fake.emoji}</div><div style="font-size:22px">¿Esto es <b>${t(item)}</b>?</div><div style="width:100%;margin-top:16px"><button class="tf-btn" style="background:#D1FAE5" onclick="checkTF(${isTrue},true)">✅ Verdadero</button><button class="tf-btn" style="background:#FEE2E2" onclick="checkTF(${isTrue},false)">❌ Falso</button></div>`;}
+ else if(g==='memory'){let pool=DB[curCat].slice(0,difficulty); let cards=[]; pool.forEach(p=>{cards.push({...p,type:'emoji',id:p.en}); cards.push({...p,type:'text',id:p.en});}); cards.sort(()=>Math.random()-.5); memState={first:null,second:null,matched:0,lock:false}; body.innerHTML=`<h3>🧠 Memoria</h3><p style="color:#8A8FA8">Encuentra ${pool.length} parejas</p><div class="memory-grid" id="memGrid" style="grid-template-columns:repeat(${difficulty===2?2:4},1fr)"></div>`; let grid=document.getElementById('memGrid'); cards.forEach(c=>{let d=document.createElement('div'); d.className='mem-card'; d.textContent='❓'; d.onclick=()=>flipCard(d,c); grid.appendChild(d);});}
+ else if(g==='listen'){body.innerHTML=`<h3>👂 Escucha</h3><button class="btn btn-blue" style="font-size:24px;padding:20px" onclick="speak('${t(item)}')">🔊 Escuchar</button><p style="margin:12px 0;color:#8A8FA8">¿Qué escuchaste?</p><div id="listenOpts" style="width:100%"></div>`; speak(t(item)); let opts=[item]; while(opts.length<(difficulty+1)){let r=DB[curCat][Math.floor(Math.random()*DB[curCat].length)]; if(!opts.includes(r))opts.push(r);} opts.sort(()=>Math.random()-.5); let d=document.getElementById('listenOpts'); opts.forEach(o=>{let b=document.createElement('button'); b.className='tf-btn'; b.textContent=o.emoji+' '+t(o); b.onclick=()=>{if(o===item){b.classList.add('correct'); celebrate(); setTimeout(next,1500);} else b.classList.add('wrong');}; d.appendChild(b);});}
+ else if(g==='spell'){if(kidAge<=5){body.innerHTML=`<div style="font-size:80px">${item.emoji}</div><p style="color:#8A8FA8">Para peques, mira y escucha</p><div style="font-size:32px;font-weight:700">${t(item)}</div><button class="btn btn-blue" onclick="speak('${t(item)}')">🔊</button><button class="btn btn-rainbow" onclick="next()" style="margin-top:10px">Siguiente →</button>`;} else {body.innerHTML=`<div style="font-size:80px">${item.emoji}</div><p>Escribe <b>${tNative(item)}</b> en ${learnLang.toUpperCase()}</p><input id="spellInput" class="input-spell" placeholder="Escribe..."><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-blue" onclick="speak('${t(item)}')">🔊</button><button class="btn btn-rainbow" onclick="checkSpell()">Comprobar ✅</button></div><div id="spellFeed"></div>`; setTimeout(()=>{let el=document.getElementById('spellInput'); if(el)el.focus();},100);}}
  else {body.innerHTML=`<div style="font-size:80px">${item.emoji}</div><div style="font-size:32px;font-weight:700">${t(item)}</div><p style="color:#8A8FA8">Próximamente</p><button class="btn btn-rainbow" onclick="next()">Siguiente →</button>`;}
 }
 function checkTF(isTrue,userTrue){if(isTrue===userTrue){celebrate(); setTimeout(next,1500);} else setTimeout(next,1000);}
