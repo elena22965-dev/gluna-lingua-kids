@@ -7,582 +7,96 @@ index.html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>GLuna Lingua Kids - Vive el Idioma</title>
+<title>GLuna Kids - 11 Juegos Completos Luna</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Fredoka',sans-serif}
-body{background:#F0F4FF;color:#2D3748;min-height:100vh;padding-bottom:90px}
-
-/* Onboarding */
-#onboarding{position:fixed;inset:0;background:linear-gradient(135deg,#EBF8FF,#FEEBC8);z-index:999;display:flex;align-items:center;justify-content:center;padding:16px}
-.box{background:#fff;border-radius:28px;padding:24px;max-width:420px;width:100%;box-shadow:0 20px 40px rgba(0,0,0,.12);display:none;flex-direction:column;max-height:92vh;overflow-y:auto}
-.box.active{display:flex}
-.logo-img{width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:4px solid #4D96FF;box-shadow:0 8px 20px rgba(77,150,255,.3);background:#EBF8FF;display:flex;align-items:center;justify-content:center;font-size:50px}
-.opt{border:2px solid #EDF2F7;border-radius:16px;padding:14px 16px;margin:6px 0;cursor:pointer;font-weight:600;background:#fff;display:flex;align-items:center;gap:10px;transition:all .2s}
-.opt:hover{border-color:#4D96FF;background:#F7FAFC}
-.age-opt{border:2px solid #EDF2F7;border-radius:18px;padding:14px;text-align:center;cursor:pointer;font-weight:700;background:#fff;transition:all .2s;flex:1}
-.age-opt.sel{background:#4D96FF!important;color:#fff!important;border-color:#4D96FF!important;transform:scale(1.05);box-shadow:0 8px 20px rgba(77,150,255,.4)}
-.btn{border:none;padding:14px;border-radius:16px;width:100%;font-weight:700;font-size:16px;cursor:pointer;background:linear-gradient(135deg,#FF6B6B,#4D96FF);color:#fff;margin-top:12px;box-shadow:0 6px 16px rgba(77,150,255,.4);transition:transform .1s}
-.btn:active{transform:scale(.98)}
-.btn-ghost{background:#EDF2F7;color:#4A5568;box-shadow:none}
-
-/* Header & Nav */
-.header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 18px rgba(0,0,0,.05);position:sticky;top:0;z-index:10}
-.brand{display:flex;align-items:center;gap:10px}
-.brand-img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #4D96FF;background:#EBF8FF;display:flex;align-items:center;justify-content:center;font-size:20px}
-.score-badge{background:#FFF9DB;border:2px solid #FFD43B;border-radius:20px;padding:6px 14px;font-weight:700;font-size:14px;color:#D9480F;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-
-.main{max-width:540px;margin:0 auto;padding:16px}
-.card{background:#fff;border-radius:24px;padding:20px;margin-bottom:16px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
-
-/* Bottom Nav */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:20}
-.nav-tab{flex:1;padding:12px;text-align:center;font-weight:700;color:#A0AEC0;cursor:pointer;font-size:13px;transition:all .2s}
-.nav-tab.active{color:#4D96FF;opacity:1}
-
-/* Grid & UI */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.cat-btn{background:#fff;border:none;border-radius:20px;padding:16px;text-align:left;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:6px;transition:all .2s}
-.cat-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.1)}
-.game-card{background:#fff;border:2px solid #EDF2F7;border-radius:16px;padding:12px;text-align:center;cursor:pointer;font-weight:700;font-size:12px;transition:all .2s}
-.game-card:hover{border-color:#4D96FF;background:#F0F4FF;transform:scale(1.03)}
-
-/* Modal */
-#modal{position:fixed;inset:0;background:#F0F4FF;z-index:100;display:none;flex-direction:column}
-.modal-header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.modal-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:480px;margin:0 auto;width:100%;text-align:center}
-
-/* Feedback Luna & Balloons */
-.luna-feedback-box{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s}
-.luna-feedback-card{background:#fff;border-radius:28px;padding:24px;text-align:center;max-width:340px;width:100%;box-shadow:0 20px 40px rgba(0,0,0,.2);animation:popIn .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
-.luna-img-fb{width:130px;height:130px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:4px solid #FFD43B;box-shadow:0 6px 16px rgba(0,0,0,.1)}
-
-/* Balloons */
-.balloon-container{position:fixed;inset:0;pointer-events:none;z-index:250;overflow:hidden}
-.balloon{position:absolute;bottom:-60px;width:50px;height:65px;border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;cursor:pointer;pointer-events:auto;animation:flyUp 3s linear infinite;box-shadow:inset -8px -8px 0px rgba(0,0,0,.15)}
-@keyframes flyUp{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-110vh) scale(1.1);opacity:0}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
+*{ -webkit-tap-highlight-color:transparent; font-family:'Fredoka',sans-serif; box-sizing:border-box; }
+body{ background:#F0F4FF; user-select:none; min-height:100vh; padding-bottom:90px; }
+.active-tab{ color:#3182CE!important; font-weight:700; border-top:3px solid #3182CE; }
+.luna-feedback-box{ position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
+.luna-feedback-card{ background:#fff; border-radius:28px; padding:24px; text-align:center; max-width:340px; width:100%; box-shadow:0 20px 40px rgba(0,0,0,.2); }
+.balloon-container{ position:fixed; inset:0; pointer-events:none; z-index:250; overflow:hidden; }
+.balloon{ position:absolute; bottom:-60px; width:50px; height:65px; border-radius:50%/60% 60% 40% 40%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:700; cursor:pointer; pointer-events:auto; animation:flyUp 3s linear infinite; }
+@keyframes flyUp{ 0%{transform:translateY(0)} 100%{transform:translateY(-110vh);opacity:0} }
+.tf-btn{ width:100%; padding:12px; margin:4px 0; border-radius:12px; border:2px solid #E2E8F0; background:#fff; font-weight:700; cursor:pointer; text-align:left; }
+.mem-card{ height:70px; border-radius:12px; border:2px solid #E2E8F0; background:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; cursor:pointer; font-size:14px; }
+.mem-card.revealed{ background:#EBF8FF; border-color:#63B3ED; }.mem-card.matched{ background:#C6F6D5; border-color:#48BB78; opacity:.7; }
 </style>
 </head>
 <body>
-
-<!-- ONBOARDING -->
-<div id="onboarding">
-  <div class="box active" id="step0">
-    <img src="logo.webp.jpg" class="logo-img" alt="🌙" onerror="this.outerHTML='<div class=\'logo-img\'>🌙</div>'">
-    <h2 style="text-align:center">¡Hola! Soy Luna 🌙</h2>
-    <p style="color:#718096;font-size:14px;text-align:center;margin:6px 0 16px">Bienvenido a GLuna Lingua Kids</p>
-
-    <label style="font-size:13px;font-weight:700;color:#4A5568">¿Cómo te llamas?</label>
-    <input id="kidName" style="width:100%;padding:12px;border:2px solid #EDF2F7;border-radius:14px;text-align:center;font-size:16px;font-weight:600;margin:6px 0 16px" placeholder="Ej: Gaddiel">
-
-    <label style="font-size:13px;font-weight:700;color:#4A5568;margin-bottom:8px;display:block">¿Cuántos años tienes?</label>
-    <div style="display:flex;gap:10px;margin-bottom:16px">
-      <div class="age-opt" id="age4" onclick="pickAge(4)">🧸<br><small>3-5 años</small></div>
-      <div class="age-opt sel" id="age7" onclick="pickAge(7)">🎒<br><small>6-8 años</small></div>
-      <div class="age-opt" id="age10" onclick="pickAge(10)">🚀<br><small>9-12 años</small></div>
-    </div>
-
-    <button class="btn" onclick="goStep1()">Continuar →</button>
-  </div>
-
-  <div class="box" id="step1">
-    <h3 id="greetH">¡Hola!</h3>
-    <p style="margin:10px 0;color:#718096">¿Qué idioma hablas en casa?</p>
-    <div class="opt" onclick="pickNative('es')">🇪🇸 Español</div>
-    <div class="opt" onclick="pickNative('en')">🇬🇧 English</div>
-    <div class="opt" onclick="pickNative('it')">🇮🇹 Italiano</div>
-    <div class="opt" onclick="pickNative('fr')">🇫🇷 Français</div>
-    <div class="opt" onclick="pickNative('de')">🇩🇪 Deutsch</div>
-    <div class="opt" onclick="pickNative('ja')">🇯🇵 日本語</div>
-    <button class="btn btn-ghost" onclick="showBox(0)">← Volver</button>
-  </div>
-
-  <div class="box" id="step2">
-    <h3>¿Qué idioma quieres aprender?</h3>
-    <div id="learnBox" style="margin:10px 0"></div>
-    <button class="btn btn-ghost" onclick="showBox(1)">← Volver</button>
-  </div>
-</div>
-
-<!-- HEADER -->
-<div class="header">
-  <div class="brand">
-    <img src="logo.webp.jpg" class="brand-img" alt="🌙" onerror="this.outerHTML='<div class=\'brand-img\'>🌙</div>'">
-    <div>
-      <b style="font-size:16px;display:block">GLuna Kids</b>
-      <small id="hName" style="color:#A0AEC0"></small>
-    </div>
-  </div>
-  <div class="score-badge">⭐ <span id="score">0</span></div>
-</div>
-
-<!-- APP MAIN -->
-<div class="main">
-  <!-- TAB HOME -->
-  <div id="tabHome">
-    <div class="card" style="background:linear-gradient(135deg,#EBF8FF,#BEE3F8);text-align:center">
-      <h2>¡Hola <span id="homeName">Gaddiel</span>! 👋</h2>
-      <p style="color:#2B6CB0;margin-top:4px">¿Qué vamos a descubrir hoy?</p>
-    </div>
-
-    <button class="card" style="width:100%;text-align:left;border:none;background:linear-gradient(135deg,#667EEA,#764BA2);color:#fff;cursor:pointer" onclick="switchTab('aprender')">
-      <div style="font-size:32px">📚</div>
-      <div style="font-size:22px;font-weight:700">APRENDER</div>
-      <p style="opacity:.9;font-size:13px">12 Categorías • 11 Juegos Interactivos</p>
-    </button>
-
-    <button class="card" style="width:100%;text-align:left;border:none;background:linear-gradient(135deg,#0F2027,#203A43);color:#fff;cursor:pointer" onclick="switchTab('novela')">
-      <div style="font-size:32px">🌙</div>
-      <div style="font-size:20px;font-weight:700">NOVELAS PRO (8 Cuentos)</div>
-      <p style="opacity:.8;font-size:13px">Vive el idioma resolviendo historias y misiones</p>
-    </button>
-  </div>
-
-  <!-- TAB APRENDER -->
-  <div id="tabAprender" style="display:none">
-    <div id="catView">
-      <h3>📚 Elige una Categoría</h3>
-      <p style="color:#718096;font-size:13px;margin-bottom:12px">Domina palabras para desbloquear las Novelas PRO</p>
-      <div class="grid-2" id="catList"></div>
-    </div>
-
-    <div id="gamesView" style="display:none">
-      <button onclick="showCategories()" style="background:#fff;border:none;padding:8px 14px;border-radius:12px;font-weight:700;margin-bottom:12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)">← Volver a Categorías</button>
-      
-      <div class="card" style="display:flex;align-items:center;gap:14px">
-        <div id="selCatIcon" style="font-size:40px">🍎</div>
-        <div>
-          <h3 id="selCatName">Frutas</h3>
-          <small id="selCatDesc" style="color:#718096">12 palabras disponibles</small>
-        </div>
-      </div>
-
-      <h4>🎮 Elige tu minijuego favorito (11 modos):</h4>
-      <div class="grid-3" style="margin-top:10px">
-        <div class="game-card" onclick="openGame('cards')">🃏<br>Cartas</div>
-        <div class="game-card" onclick="openGame('quiz')">🧩<br>Quiz</div>
-        <div class="game-card" onclick="openGame('tf')">✅❌<br>V o F</div>
-        <div class="game-card" onclick="openGame('memory')">🧠<br>Memoria</div>
-        <div class="game-card" onclick="openGame('listen')">👂<br>Escucha</div>
-        <div class="game-card" onclick="openGame('riddle')">🤔<br>Adivina</div>
-        <div class="game-card" onclick="openGame('spell')">✍️<br>Deletrea</div>
-        <div class="game-card" onclick="openGame('match')">🔗<br>Une</div>
-        <div class="game-card" onclick="openGame('speed')">⚡<br>Rápido</div>
-        <div class="game-card" onclick="openGame('story')">📖<br>Cuento</div>
-        <div class="game-card" onclick="openGame('repeat')" style="border-color:#48BB78;background:#F0FFF4">🎤<br>Pronuncia</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB NOVELA -->
-  <div id="tabNovela" style="display:none">
-    <div class="card" style="background:linear-gradient(135deg,#1A202C,#2D3748);color:#fff;text-align:center">
-      <div style="font-size:40px">🌙🦋🐝🐿️</div>
-      <h3>Novelas PRO - 8 Historias</h3>
-      <p style="font-size:12px;opacity:.8;margin-top:4px">2 Cuentos Gratis y 6 Cuentos PRO con Misiones Interactivas.</p>
-    </div>
-
-    <div id="novelList"></div>
-  </div>
-</div>
-
-<!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <div class="nav-tab active" id="navH" onclick="goHome()">🏠 Inicio</div>
-  <div class="nav-tab" id="navA" onclick="switchTab('aprender')">📚 Aprender</div>
-  <div class="nav-tab" id="navN" onclick="switchTab('novela')">🌙 Novelas PRO</div>
-</div>
-
-<!-- GAME MODAL -->
-<div id="modal">
-  <div class="modal-header">
-    <button class="btn btn-ghost" style="width:auto;padding:6px 12px;margin:0" onclick="closeGame()">← Salir</button>
-    <b id="modalTitle">Juego</b>
-    <div class="score-badge">⭐ <span id="modalScore">0</span></div>
-  </div>
-  <div class="modal-body" id="modalBody"></div>
-</div>
-
+<div id="onboarding" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+<div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-4 border-sky-200 text-center max-h-[92vh] overflow-y-auto">
+<div class="w-28 h-28 mx-auto rounded-full bg-sky-100 flex items-center justify-center text-4xl mb-3 border-4 border-yellow-300">🌙</div>
+<div id="step0"><h2 class="text-2xl font-bold text-sky-600">¡Hola! Soy Luna 🌙</h2><input id="kidName" placeholder="Ej: Gaddiel" class="w-full text-center text-lg font-bold p-3 border-2 border-sky-200 rounded-2xl mt-4"><div class="grid grid-cols-3 gap-2 mt-4"><button class="border-2 p-2 rounded-2xl font-bold text-xs" onclick="pickAge(4)">🧸<br>3-5</button><button class="border-2 p-2 rounded-2xl font-bold text-xs bg-sky-200" onclick="pickAge(7)">🎒<br>6-8</button><button class="border-2 p-2 rounded-2xl font-bold text-xs" onclick="pickAge(10)">🚀<br>9-12</button></div><button onclick="goStep(1)" class="w-full bg-sky-500 text-white font-bold p-4 rounded-2xl mt-4">Continuar →</button></div>
+<div id="step1" class="hidden"><h3 id="greetH" class="font-bold text-xl">¡Hola!</h3><div class="space-y-2 mt-4"><button onclick="pickNative('es')" class="w-full p-3 border-2 rounded-2xl font-semibold">🇪🇸 Español</button><button onclick="pickNative('en')" class="w-full p-3 border-2 rounded-2xl font-semibold">🇬🇧 English</button><button onclick="pickNative('it')" class="w-full p-3 border-2 rounded-2xl font-semibold">🇮🇹 Italiano</button><button onclick="pickNative('fr')" class="w-full p-3 border-2 rounded-2xl font-semibold">🇫🇷 Français</button><button onclick="pickNative('de')" class="w-full p-3 border-2 rounded-2xl font-semibold">🇩🇪 Deutsch</button><button onclick="pickNative('ja')" class="w-full p-3 border-2 rounded-2xl font-semibold">🇯🇵 日本語</button></div></div>
+<div id="step2" class="hidden"><h3 class="font-bold text-xl">¿Qué aprender?</h3><div id="learnOptions" class="space-y-2 mt-4"></div></div>
+</div></div>
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b px-4 py-3 flex justify-between"><div class="flex gap-2 items-center"><div class="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center">🌙</div><div><b>GLuna Final Luna</b><div id="hProfile" class="text-xs text-sky-500">...</div></div></div><div class="bg-yellow-100 border-2 border-yellow-300 rounded-full px-3 py-1 font-bold text-sm">⭐ <span id="score">0</span></div></header>
+<main class="max-w-md mx-auto p-4 w-full flex-1">
+<section id="tabHome"><div class="bg-gradient-to-br from-sky-400 to-indigo-400 rounded-3xl p-6 text-white"><h2 class="text-2xl font-bold">¡Hola, <span id="homeName">Gaddiel</span>! 👋</h2><p class="text-xs opacity-90 mt-1">11 juegos 100% completos + Luna + Globos</p></div><div class="grid gap-3 mt-4"><button onclick="switchTab('aprender')" class="bg-white p-5 rounded-3xl border-2 border-sky-100 flex gap-4 text-left shadow-sm"><div class="text-3xl">📚</div><div><h3 class="font-bold">APRENDER</h3><p class="text-xs text-slate-500">11 juegos reales sin genéricos</p></div></button><button onclick="switchTab('novela')" class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-5 rounded-3xl flex gap-4 text-left"><div class="text-3xl">🌙</div><div><h3 class="font-bold text-amber-200">NOVELAS PRO (8)</h3><p class="text-xs">2 gratis + 6 con requisitos reales</p></div></button></div><div class="bg-white p-4 rounded-3xl border mt-4"><div class="flex gap-3 items-center"><div class="flex-1 bg-slate-100 rounded-full h-3"><div id="progBar" class="bg-amber-400 h-full w-0"></div></div><span id="progText" class="text-xs font-bold">0%</span></div></div></section>
+<section id="tabAprender" class="hidden"><div id="catListView"><h2 class="text-xl font-bold mb-3">📚 Categorías</h2><div id="catGrid" class="grid grid-cols-2 gap-3"></div></div><div id="gameSelectionView" class="hidden"><button onclick="showCategories()" class="text-xs font-bold text-sky-600 bg-white px-3 py-2 rounded-xl border mb-3">← Categorías</button><div class="bg-white p-4 rounded-3xl border-2 border-sky-200 flex gap-3 items-center"><div id="selCatIcon" class="text-4xl">🍎</div><div><h3 id="selCatName" class="font-bold">Frutas</h3><p id="selCatCount" class="text-xs text-slate-400">12 palabras</p></div></div><h3 class="font-bold text-sm mt-4">🎮 11 juegos 100% completos:</h3><div class="grid grid-cols-3 gap-2 mt-2"><button onclick="launchGame('cards')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">🃏<br>Cartas</button><button onclick="launchGame('quiz')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">🧩<br>Quiz</button><button onclick="launchGame('tf')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">✅❌<br>V o F</button><button onclick="launchGame('memory')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">🧠<br>Memoria</button><button onclick="launchGame('listen')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">👂<br>Escucha</button><button onclick="launchGame('riddle')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">🤔<br>Adivina</button><button onclick="launchGame('spell')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">✍️<br>Deletrea</button><button onclick="launchGame('match')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">🔗<br>Une</button><button onclick="launchGame('speed')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">⚡<br>Rápido</button><button onclick="launchGame('story')" class="p-3 bg-white rounded-2xl border shadow-sm font-bold text-xs">📖<br>Cuento</button><button onclick="launchGame('repeat')" class="p-3 bg-emerald-50 border-2 border-emerald-300 rounded-2xl shadow-sm font-bold text-xs text-emerald-800">🎤<br>Pronuncia</button></div></div></section>
+<section id="tabNovela" class="hidden"><div class="bg-gradient-to-r from-purple-900 to-slate-900 text-white p-5 rounded-3xl text-center"><div class="text-4xl">🌙🦋🐝🐿️</div><h2 class="font-bold text-amber-300">Novelas PRO - 8 Historias</h2></div><div id="novelList" class="space-y-3 mt-3"></div></section>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white/95 border-t flex justify-around z-40"><button onclick="switchTab('home')" id="navH" class="flex-1 py-3 text-xs font-bold text-slate-400">🏠<br>Inicio</button><button onclick="switchTab('aprender')" id="navA" class="flex-1 py-3 text-xs font-bold text-slate-400">📚<br>Aprender</button><button onclick="switchTab('novela')" id="navN" class="flex-1 py-3 text-xs font-bold text-slate-400">🌙<br>Novelas</button></nav>
+<div id="modalGame" class="fixed inset-0 z-50 bg-slate-900/70 hidden flex-col p-4"><div class="bg-white rounded-3xl max-w-md w-full mx-auto flex-1 flex flex-col overflow-hidden my-auto max-h-[92vh]"><div class="p-4 bg-sky-50 border-b flex justify-between items-center"><button onclick="closeModalGame()" class="text-xs font-bold bg-white px-3 py-1.5 rounded-xl border">✕</button><h3 id="modalGameTitle" class="font-bold text-sm uppercase">Juego</h3><div class="bg-yellow-100 px-2.5 py-1 rounded-full text-xs font-bold">⭐ <span id="modalScore">0</span></div></div><div id="modalGameBody" class="p-5 flex-1 overflow-y-auto flex flex-col items-center justify-center text-center"></div></div></div>
 <script>
-// BASE DE DATOS - LAS 12 CATEGORÍAS COMPLETAS
-var DB = {
-  fruits: [
-    {en:"apple",es:"manzana",it:"mela",fr:"pomme",de:"Apfel",ja:"ringo",emoji:"🍎"},
-    {en:"banana",es:"plátano",it:"banana",fr:"banane",de:"Banane",ja:"banana",emoji:"🍌"},
-    {en:"orange",es:"naranja",it:"arancia",fr:"orange",de:"Orange",ja:"orenji",emoji:"🍊"},
-    {en:"strawberry",es:"fresa",it:"fragola",fr:"fraise",de:"Erdbeere",ja:"ichigo",emoji:"🍓"},
-    {en:"lemon",es:"limón",it:"limone",fr:"citron",de:"Zitrone",ja:"remon",emoji:"🍋"},
-    {en:"peach",es:"durazno",it:"pesca",fr:"pêche",de:"Pfirsich",ja:"momo",emoji:"🍑"}
-  ],
-  animals: [
-    {en:"cat",es:"gato",it:"gatto",fr:"chat",de:"Katze",ja:"neko",emoji:"🐱"},
-    {en:"dog",es:"perro",it:"cane",fr:"chien",de:"Hund",ja:"inu",emoji:"🐶"},
-    {en:"lion",es:"león",it:"leone",fr:"lion",de:"Löwe",ja:"raion",emoji:"🦁"},
-    {en:"bear",es:"oso",it:"orso",fr:"ours",de:"Bär",ja:"kuma",emoji:"🐻"}
-  ],
-  colors: [
-    {en:"red",es:"rojo",it:"rosso",fr:"rouge",de:"rot",ja:"akai",emoji:"🔴"},
-    {en:"blue",es:"azul",it:"blu",fr:"bleu",de:"blau",ja:"aoi",emoji:"🔵"},
-    {en:"yellow",es:"amarillo",it:"giallo",fr:"jaune",de:"gelb",ja:"kiiroi",emoji:"🟡"},
-    {en:"green",es:"verde",it:"verde",fr:"vert",de:"grün",ja:"midori",emoji:"🟢"}
-  ],
-  food: [
-    {en:"milk",es:"leche",it:"latte",fr:"lait",de:"Milch",ja:"miruku",emoji:"🥛"},
-    {en:"bread",es:"pan",it:"pane",fr:"pain",de:"Brot",ja:"pan",emoji:"🍞"},
-    {en:"cheese",es:"queso",it:"formaggio",fr:"fromage",de:"Käse",ja:"chiizu",emoji:"🧀"},
-    {en:"pizza",es:"pizza",it:"pizza",fr:"pizza",de:"Pizza",ja:"piza",emoji:"🍕"}
-  ],
-  numbers: [
-    {en:"one",es:"uno",it:"uno",fr:"un",de:"eins",ja:"ichi",emoji:"1️⃣"},
-    {en:"two",es:"dos",it:"due",fr:"deux",de:"zwei",ja:"ni",emoji:"2️⃣"},
-    {en:"three",es:"tres",it:"tre",fr:"trois",de:"drei",ja:"san",emoji:"3️⃣"},
-    {en:"four",es:"cuatro",it:"quattro",fr:"quatre",de:"vier",ja:"shi",emoji:"4️⃣"}
-  ],
-  clothes: [
-    {en:"shirt",es:"camisa",it:"camicia",fr:"chemise",de:"Hemd",ja:"shatsu",emoji:"👕"},
-    {en:"pants",es:"pantalón",it:"pantaloni",fr:"pantalon",de:"Hose",ja:"zubon",emoji:"👖"},
-    {en:"shoes",es:"zapatos",it:"scarpe",fr:"chaussures",de:"Schuhe",ja:"kutsu",emoji:"👟"},
-    {en:"hat",es:"sombrero",it:"cappello",fr:"chapeau",de:"Hut",ja:"boushi",emoji:"🧢"}
-  ],
-  home: [
-    {en:"house",es:"casa",it:"casa",fr:"maison",de:"Haus",ja:"ie",emoji:"🏠"},
-    {en:"bed",es:"cama",it:"letto",fr:"lit",de:"Bett",ja:"beddo",emoji:"🛏️"},
-    {en:"door",es:"puerta",it:"porta",fr:"porte",de:"Tür",ja:"dora",emoji:"🚪"},
-    {en:"chair",es:"silla",it:"sedia",fr:"chaise",de:"Stuhl",ja:"isu",emoji:"🪑"}
-  ],
-  transport: [
-    {en:"car",es:"auto",it:"auto",fr:"voiture",de:"Auto",ja:"kuruma",emoji:"🚗"},
-    {en:"airplane",es:"avión",it:"aereo",fr:"avion",de:"Flugzeug",ja:"hikouki",emoji:"✈️"},
-    {en:"rocket",es:"cohete",it:"razzo",fr:"fusée",de:"Rakete",ja:"roketto",emoji:"🚀"},
-    {en:"ship",es:"barco",it:"nave",fr:"bateau",de:"Schiff",ja:"fune",emoji:"🚢"}
-  ],
-  nature: [
-    {en:"tree",es:"árbol",it:"albero",fr:"arbre",de:"Baum",ja:"ki",emoji:"🌳"},
-    {en:"sun",es:"sol",it:"sole",fr:"soleil",de:"Sonne",ja:"taiyou",emoji:"☀️"},
-    {en:"flower",es:"flor",it:"fiore",fr:"fleur",de:"Blume",ja:"hana",emoji:"🌸"},
-    {en:"mountain",es:"montaña",it:"montagna",fr:"montagne",de:"Berg",ja:"yama",emoji:"⛰️"}
-  ],
-  school: [
-    {en:"book",es:"libro",it:"libro",fr:"livre",de:"Buch",ja:"hon",emoji:"📖"},
-    {en:"pencil",es:"lápiz",it:"matita",fr:"crayon",de:"Bleistift",ja:"enpitsu",emoji:"✏️"},
-    {en:"backpack",es:"mochila",it:"zaino",fr:"sac à dos",de:"Rucksack",ja:"ryukku",emoji:"🎒"},
-    {en:"school",es:"escuela",it:"scuola",fr:"école",de:"Schule",ja:"gakkou",emoji:"🏫"}
-  ],
-  body: [
-    {en:"eye",es:"ojo",it:"occhio",fr:"œil",de:"Auge",ja:"me",emoji:"👁️"},
-    {en:"hand",es:"mano",it:"mano",fr:"main",de:"Hand",ja:"te",emoji:"🖐️"},
-    {en:"foot",es:"pie",it:"piede",fr:"pied",de:"Fuß",ja:"ashi",emoji:"🦶"},
-    {en:"heart",es:"corazón",it:"cuore",fr:"cœur",de:"Herz",ja:"kokoro",emoji:"❤️"}
-  ],
-  emotions: [
-    {en:"happy",es:"feliz",it:"felice",fr:"heureux",de:"glücklich",ja:"ureshii",emoji:"😊"},
-    {en:"sad",es:"triste",it:"triste",fr:"triste",de:"traurig",ja:"kanashii",emoji:"😢"},
-    {en:"angry",es:"enojado",it:"arrabbiato",fr:"fâché",de:"wütend",ja:"okotteiru",emoji:"😡"},
-    {en:"surprised",es:"sorprendido",it:"sorpreso",fr:"surpris",de:"überrascht",ja:"odoroki",emoji:"😲"}
-  ]
+const VOCAB={
+fruits:[{en:"apple",es:"manzana",it:"mela",fr:"pomme",de:"Apfel",ja:"ringo",emoji:"🍎"},{en:"banana",es:"plátano",it:"banana",fr:"banane",de:"Banane",ja:"banana",emoji:"🍌"},{en:"orange",es:"naranja",it:"arancia",fr:"orange",de:"Orange",ja:"orenji",emoji:"🍊"},{en:"strawberry",es:"fresa",it:"fragola",fr:"fraise",de:"Erdbeere",ja:"ichigo",emoji:"🍓"},{en:"cherry",es:"cereza",it:"ciliegia",fr:"cerise",de:"Kirsche",ja:"sakuranbo",emoji:"🍒"},{en:"grape",es:"uva",it:"uva",fr:"raisin",de:"Traube",ja:"budou",emoji:"🍇"},{en:"watermelon",es:"sandía",it:"anguria",fr:"pastèque",de:"Wassermelone",ja:"suika",emoji:"🍉"},{en:"pineapple",es:"piña",it:"ananas",fr:"ananas",de:"Ananas",ja:"painappuru",emoji:"🍍"},{en:"lemon",es:"limón",it:"limone",fr:"citron",de:"Zitrone",ja:"remon",emoji:"🍋"},{en:"peach",es:"durazno",it:"pesca",fr:"pêche",de:"Pfirsich",ja:"momo",emoji:"🍑"},{en:"pear",es:"pera",it:"pera",fr:"poire",de:"Birne",ja:"nashi",emoji:"🍐"},{en:"mango",es:"mango",it:"mango",fr:"mangue",de:"Mango",ja:"mango",emoji:"🥭"}],
+  animals:[{en:"cat",es:"gato",it:"gatto",fr:"chat",de:"Katze",ja:"neko",emoji:"🐱"},{en:"dog",es:"perro",it:"cane",fr:"chien",de:"Hund",ja:"inu",emoji:"🐶"},{en:"lion",es:"león",it:"leone",fr:"lion",de:"Löwe",ja:"raion",emoji:"🦁"},{en:"bear",es:"oso",it:"orso",fr:"ours",de:"Bär",ja:"kuma",emoji:"🐻"},{en:"elephant",es:"elefante",it:"elefante",fr:"éléphant",de:"Elefant",ja:"zou",emoji:"🐘"},{en:"tiger",es:"tigre",it:"tigre",fr:"tigre",de:"Tiger",ja:"tora",emoji:"🐯"},{en:"monkey",es:"mono",it:"scimmia",fr:"singe",de:"Affe",ja:"saru",emoji:"🐒"},{en:"rabbit",es:"conejo",it:"coniglio",fr:"lapin",de:"Kaninchen",ja:"usagi",emoji:"🐰"},{en:"bird",es:"pájaro",it:"uccello",fr:"oiseau",de:"Vogel",ja:"tori",emoji:"🐦"},{en:"fish",es:"pez",it:"pesce",fr:"poisson",de:"Fisch",ja:"sakana",emoji:"🐟"},{en:"horse",es:"caballo",it:"cavallo",fr:"cheval",de:"Pferd",ja:"uma",emoji:"🐴"},{en:"cow",es:"vaca",it:"mucca",fr:"vache",de:"Kuh",ja:"ushi",emoji:"🐄"}],
+colors:[{en:"red",es:"rojo",it:"rosso",fr:"rouge",de:"rot",ja:"akai",emoji:"🔴"},{en:"blue",es:"azul",it:"blu",fr:"bleu",de:"blau",ja:"aoi",emoji:"🔵"},{en:"yellow",es:"amarillo",it:"giallo",fr:"jaune",de:"gelb",ja:"kiiroi",emoji:"🟡"},{en:"green",es:"verde",it:"verde",fr:"vert",de:"grün",ja:"midori",emoji:"🟢"},{en:"orange",es:"naranja",it:"arancione",fr:"orange",de:"orange",ja:"orenji",emoji:"🟠"},{en:"purple",es:"morado",it:"viola",fr:"violet",de:"lila",ja:"murasaki",emoji:"🟣"},{en:"pink",es:"rosa",it:"rosa",fr:"rose",de:"rosa",ja:"pinku",emoji:"🩷"},{en:"black",es:"negro",it:"nero",fr:"noir",de:"schwarz",ja:"kuroi",emoji:"⚫"},{en:"white",es:"blanco",it:"bianco",fr:"blanc",de:"weiß",ja:"shiroi",emoji:"⚪"},{en:"brown",es:"marrón",it:"marrone",fr:"marron",de:"braun",ja:"chairoi",emoji:"🟤"},{en:"gray",es:"gris",it:"grigio",fr:"gris",de:"grau",ja:"haiiro",emoji:"⬜"},{en:"gold",es:"dorado",it:"oro",fr:"or",de:"gold",ja:"kin",emoji:"✨"}],
+food:[{en:"milk",es:"leche",it:"latte",fr:"lait",de:"Milch",ja:"miruku",emoji:"🥛"},{en:"bread",es:"pan",it:"pane",fr:"pain",de:"Brot",ja:"pan",emoji:"🍞"},{en:"cheese",es:"queso",it:"formaggio",fr:"fromage",de:"Käse",ja:"chiizu",emoji:"🧀"},{en:"egg",es:"huevo",it:"uovo",fr:"œuf",de:"Ei",ja:"tamago",emoji:"🥚"},{en:"rice",es:"arroz",it:"riso",fr:"riz",de:"Reis",ja:"gohan",emoji:"🍚"},{en:"chicken",es:"pollo",it:"pollo",fr:"poulet",de:"Huhn",ja:"toriniku",emoji:"🍗"},{en:"pizza",es:"pizza",it:"pizza",fr:"pizza",de:"Pizza",ja:"piza",emoji:"🍕"},{en:"soup",es:"sopa",it:"zuppa",fr:"soupe",de:"Suppe",ja:"suupu",emoji:"🍲"},{en:"salad",es:"ensalada",it:"insalata",fr:"salade",de:"Salat",ja:"sarada",emoji:"🥗"},{en:"cake",es:"pastel",it:"torta",fr:"gâteau",de:"Kuchen",ja:"keeki",emoji:"🍰"},{en:"cookie",es:"galleta",it:"biscotto",fr:"biscuit",de:"Keks",ja:"kukkii",emoji:"🍪"},{en:"honey",es:"miel",it:"miele",fr:"miel",de:"Honig",ja:"hachimitsu",emoji:"🍯"}],
+numbers:[{en:"one",es:"uno",it:"uno",fr:"un",de:"eins",ja:"ichi",emoji:"1️⃣"},{en:"two",es:"dos",it:"due",fr:"deux",de:"zwei",ja:"ni",emoji:"2️⃣"},{en:"three",es:"tres",it:"tre",fr:"trois",de:"drei",ja:"san",emoji:"3️⃣"},{en:"four",es:"cuatro",it:"quattro",fr:"quatre",de:"vier",ja:"shi",emoji:"4️⃣"},{en:"five",es:"cinco",it:"cinque",fr:"cinq",de:"fünf",ja:"go",emoji:"5️⃣"},{en:"six",es:"seis",it:"sei",fr:"six",de:"sechs",ja:"roku",emoji:"6️⃣"},{en:"seven",es:"siete",it:"sette",fr:"sept",de:"sieben",ja:"shichi",emoji:"7️⃣"},{en:"eight",es:"ocho",it:"otto",fr:"huit",de:"acht",ja:"hachi",emoji:"8️⃣"},{en:"nine",es:"nueve",it:"nove",fr:"neuf",de:"neun",ja:"kyu",emoji:"9️⃣"},{en:"ten",es:"diez",it:"dieci",fr:"dix",de:"zehn",ja:"juu",emoji:"🔟"},{en:"eleven",es:"once",it:"undici",fr:"onze",de:"elf",ja:"juuichi",emoji:"1️⃣1️⃣"},{en:"twelve",es:"doce",it:"dodici",fr:"douze",de:"zwölf",ja:"juuni",emoji:"1️⃣2️⃣"}],
+clothing:[{en:"shirt",es:"camisa",it:"camicia",fr:"chemise",de:"Hemd",ja:"shatsu",emoji:"👕"},{en:"pants",es:"pantalón",it:"pantaloni",fr:"pantalon",de:"Hose",ja:"zubon",emoji:"👖"},{en:"dress",es:"vestido",it:"vestito",fr:"robe",de:"Kleid",ja:"doresu",emoji:"👗"},{en:"hat",es:"sombrero",it:"cappello",fr:"chapeau",de:"Hut",ja:"boushi",emoji:"🎩"},{en:"shoes",es:"zapatos",it:"scarpe",fr:"chaussures",de:"Schuhe",ja:"kutsu",emoji:"👟"},{en:"jacket",es:"chaqueta",it:"giacca",fr:"veste",de:"Jacke",ja:"jaketto",emoji:"🧥"},{en:"socks",es:"calcetines",it:"calzini",fr:"chaussettes",de:"Socken",ja:"kutsushita",emoji:"🧦"},{en:"gloves",es:"guantes",it:"guanti",fr:"gants",de:"Handschuhe",ja:"tebukuro",emoji:"🧤"},{en:"scarf",es:"bufanda",it:"sciarpa",fr:"écharpe",de:"Schal",ja:"mafraa",emoji:"🧣"},{en:"shorts",es:"cortos",it:"pantaloncini",fr:"short",de:"Shorts",ja:"shottsu",emoji:"🩳"},{en:"skirt",es:"falda",it:"gonna",fr:"jupe",de:"Rock",ja:"sukaato",emoji:"👚"},{en:"coat",es:"abrigo",it:"cappotto",fr:"manteau",de:"Mantel",ja:"kooto",emoji:"🧥"}],
+  house:[{en:"house",es:"casa",it:"casa",fr:"maison",de:"Haus",ja:"ie",emoji:"🏠"},{en:"bed",es:"cama",it:"letto",fr:"lit",de:"Bett",ja:"beddo",emoji:"🛏️"},{en:"table",es:"mesa",it:"tavolo",fr:"table",de:"Tisch",ja:"teeburu",emoji:"🪑"},{en:"chair",es:"silla",it:"sedia",fr:"chaise",de:"Stuhl",ja:"isu",emoji:"💺"},{en:"door",es:"puerta",it:"porta",fr:"porte",de:"Tür",ja:"doa",emoji:"🚪"},{en:"window",es:"ventana",it:"finestra",fr:"fenêtre",de:"Fenster",ja:"mado",emoji:"🪟"},{en:"lamp",es:"lámpara",it:"lampada",fr:"lampe",de:"Lampe",ja:"ranpu",emoji:"💡"},{en:"kitchen",es:"cocina",it:"cucina",fr:"cuisine",de:"Küche",ja:"kicchin",emoji:"🍳"},{en:"bathroom",es:"baño",it:"bagno",fr:"salle de bain",de:"Bad",ja:"basuruumu",emoji:"🚿"},{en:"sofa",es:"sofá",it:"divano",fr:"canapé",de:"Sofa",ja:"sofa",emoji:"🛋️"},{en:"clock",es:"reloj",it:"orologio",fr:"horloge",de:"Uhr",ja:"tokei",emoji:"⏰"},{en:"book",es:"libro",it:"libro",fr:"livre",de:"Buch",ja:"hon",emoji:"📖"}],
+transport:[{en:"car",es:"coche",it:"auto",fr:"voiture",de:"Auto",ja:"kuruma",emoji:"🚗"},{en:"bus",es:"autobús",it:"autobus",fr:"bus",de:"Bus",ja:"basu",emoji:"🚌"},{en:"train",es:"tren",it:"treno",fr:"train",de:"Zug",ja:"densha",emoji:"🚂"},{en:"plane",es:"avión",it:"aereo",fr:"avion",de:"Flugzeug",ja:"hikouki",emoji:"✈️"},{en:"bike",es:"bicicleta",it:"bicicletta",fr:"vélo",de:"Fahrrad",ja:"jitensha",emoji:"🚲"},{en:"boat",es:"barco",it:"barca",fr:"bateau",de:"Boot",ja:"fune",emoji:"⛵"},{en:"rocket",es:"cohete",it:"razzo",fr:"fusée",de:"Rakete",ja:"roketto",emoji:"🚀"},{en:"taxi",es:"taxi",it:"taxi",fr:"taxi",de:"Taxi",ja:"takushii",emoji:"🚕"},{en:"truck",es:"camión",it:"camion",fr:"camion",de:"LKW",ja:"torakku",emoji:"🚚"},{en:"helicopter",es:"helicóptero",it:"elicottero",fr:"hélicoptère",de:"Hubschrauber",ja:"herikopteraa",emoji:"🚁"},{en:"ship",es:"crucero",it:"nave",fr:"navire",de:"Schiff",ja:"fune",emoji:"🚢"},{en:"scooter",es:"motoneta",it:"monopattino",fr:"trottinette",de:"Roller",ja:"sukuutaa",emoji:"🛵"}],
+nature:[{en:"tree",es:"árbol",it:"albero",fr:"arbre",de:"Baum",ja:"ki",emoji:"🌳"},{en:"flower",es:"flor",it:"fiore",fr:"fleur",de:"Blume",ja:"hana",emoji:"🌸"},{en:"sun",es:"sol",it:"sole",fr:"soleil",de:"Sonne",ja:"taiyou",emoji:"☀️"},{en:"moon",es:"luna",it:"luna",fr:"lune",de:"Mond",ja:"tsuki",emoji:"🌙"},{en:"star",es:"estrella",it:"stella",fr:"étoile",de:"Stern",ja:"hoshi",emoji:"⭐"},{en:"river",es:"río",it:"fiume",fr:"rivière",de:"Fluss",ja:"kawa",emoji:"🌊"},{en:"mountain",es:"montaña",it:"montagna",fr:"montagne",de:"Berg",ja:"yama",emoji:"⛰️"},{en:"cloud",es:"nube",it:"nuvola",fr:"nuage",de:"Wolke",ja:"kumo",emoji:"☁️"},{en:"rain",es:"lluvia",it:"pioggia",fr:"pluie",de:"Regen",ja:"ame",emoji:"🌧️"},{en:"rainbow",es:"arcoíris",it:"arcobaleno",fr:"arc-en-ciel",de:"Regenbogen",ja:"niji",emoji:"🌈"},{en:"sea",es:"mar",it:"mare",fr:"mer",de:"Meer",ja:"umi",emoji:"🌊"},{en:"forest",es:"bosque",it:"foresta",fr:"forêt",de:"Wald",ja:"mori",emoji:"🌲"}],
+school:[{en:"book",es:"libro",it:"libro",fr:"livre",de:"Buch",ja:"hon",emoji:"📖"},{en:"pencil",es:"lápiz",it:"matita",fr:"crayon",de:"Bleistift",ja:"enpitsu",emoji:"✏️"},{en:"teacher",es:"profesor",it:"insegnante",fr:"professeur",de:"Lehrer",ja:"sensei",emoji:"🧑‍🏫"},{en:"student",es:"estudiante",it:"studente",fr:"étudiant",de:"Schüler",ja:"gakusei",emoji:"🧑‍🎓"},{en:"school",es:"escuela",it:"scuola",fr:"école",de:"Schule",ja:"gakkou",emoji:"🏫"},{en:"bag",es:"mochila",it:"zaino",fr:"sac",de:"Rucksack",ja:"kaban",emoji:"🎒"},{en:"ruler",es:"regla",it:"righello",fr:"règle",de:"Lineal",ja:"monosashi",emoji:"📏"},{en:"scissors",es:"tijeras",it:"forbici",fr:"ciseaux",de:"Schere",ja:"hasami",emoji:"✂️"},{en:"desk",es:"escritorio",it:"banco",fr:"bureau",de:"Schreibtisch",ja:"tsukue",emoji:"🪑"},{en:"paper",es:"papel",it:"carta",fr:"papier",de:"Papier",ja:"kami",emoji:"📄"},{en:"map",es:"mapa",it:"mappa",fr:"carte",de:"Karte",ja:"chizu",emoji:"🗺️"},{en:"paint",es:"pintura",it:"pittura",fr:"peinture",de:"Farbe",ja:"enogu",emoji:"🎨"}],
+body:[{en:"hand",es:"mano",it:"mano",fr:"main",de:"Hand",ja:"te",emoji:"✋"},{en:"eye",es:"ojo",it:"occhio",fr:"œil",de:"Auge",ja:"me",emoji:"👁️"},{en:"head",es:"cabeza",it:"testa",fr:"tête",de:"Kopf",ja:"atama",emoji:"🧑"},{en:"nose",es:"nariz",it:"naso",fr:"nez",de:"Nase",ja:"hana",emoji:"👃"},{en:"mouth",es:"boca",it:"bocca",fr:"bouche",de:"Mund",ja:"kuchi",emoji:"👄"},{en:"ear",es:"oreja",it:"orecchio",fr:"oreille",de:"Ohr",ja:"mimi",emoji:"👂"},{en:"arm",es:"brazo",it:"braccio",fr:"bras",de:"Arm",ja:"ude",emoji:"💪"},{en:"leg",es:"pierna",it:"gamba",fr:"jambe",de:"Bein",ja:"ashi",emoji:"🦵"},{en:"foot",es:"pie",it:"piede",fr:"pied",de:"Fuß",ja:"ashi",emoji:"🦶"},{en:"hair",es:"pelo",it:"capelli",fr:"cheveux",de:"Haar",ja:"kami",emoji:"💇"},{en:"heart",es:"corazón",it:"cuore",fr:"cœur",de:"Herz",ja:"haato",emoji:"❤️"},{en:"smile",es:"sonrisa",it:"sorriso",fr:"sourire",de:"Lächeln",ja:"egao",emoji:"😊"}],
+emotions:[{en:"happy",es:"feliz",it:"felice",fr:"heureux",de:"glücklich",ja:"ureshii",emoji:"😀"},{en:"sad",es:"triste",it:"triste",fr:"triste",de:"traurig",ja:"kanashii",emoji:"😢"},{en:"angry",es:"enojado",it:"arrabbiato",fr:"fâché",de:"wütend",ja:"okotteiru",emoji:"😡"},{en:"surprised",es:"sorprendido",it:"sorpreso",fr:"surpris",de:"überrascht",ja:"odoroki",emoji:"😲"},{en:"tired",es:"cansado",it:"stanco",fr:"fatigué",de:"müde",ja:"tsukareteiru",emoji:"😴"},{en:"scared",es:"asustado",it:"spaventato",fr:"effrayé",de:"ängstlich",ja:"kowagaru",emoji:"😱"},{en:"excited",es:"emocionado",it:"entusiasta",fr:"excité",de:"begeistert",ja:"wakuwaku",emoji:"🤩"},{en:"calm",es:"tranquilo",it:"calmo",fr:"calme",de:"ruhig",ja:"odayaka",emoji:"😌"},{en:"brave",es:"valiente",it:"coraggioso",fr:"courageux",de:"mutig",ja:"yuukan",emoji:"🦁"},{en:"funny",es:"divertido",it:"divertente",fr:"amusant",de:"lustig",ja:"omoshiroi",emoji:"😜"},{en:"shy",es:"tímido",it:"timido",fr:"timide",de:"schüchtern",ja:"hazukashii",emoji:"😳"},{en:"loved",es:"amado",it:"amato",fr:"aimé",de:"geliebt",ja:"aされている",emoji:"🥰"}]
 };
-
-// LISTA DE LAS 12 CATEGORÍAS
-var CATS = [
-  {id:'fruits',name:'Frutas',icon:'🍎'},
-  {id:'animals',name:'Animales',icon:'🦁'},
-  {id:'colors',name:'Colores',icon:'🎨'},
-  {id:'food',name:'Comida',icon:'🍕'},
-  {id:'numbers',name:'Números',icon:'🔢'},
-  {id:'clothes',name:'Ropa',icon:'👕'},
-  {id:'home',name:'En Casa',icon:'🏠'},
-  {id:'transport',name:'Transporte',icon:'🚀'},
-  {id:'nature',name:'Naturaleza',icon:'🌳'},
-  {id:'school',name:'Escuela',icon:'🎒'},
-  {id:'body',name:'Cuerpo',icon:'🖐️'},
-  {id:'emotions',name:'Emociones',icon:'🎭'}
-];
-
-// 8 NOVELAS PRO (2 Gratis, 6 PRO Paywall)
-var NOVELS = [
-  {id:1, title:"El Mercado de las Sorpresas", icon:"🍎🛒", free:true, text:"Había una vez {name} en el Mercado. Compró ___ 🍎 y comió ___ 🧀."},
-  {id:2, title:"El Bosque Encantado", icon:"🌲🦁", free:true, text:"{name} caminaba por el bosque y vio un ___ 🦁 al lado de un ___ 🐻."},
-  {id:3, title:"La Fiesta Mágica de los Colores", icon:"🎨🎈", free:false, text:"En la fiesta todo era mágico: un globo ___ 🔴 y un pastel ___ 🟡."},
-  {id:4, title:"El Gran Viaje Espacial", icon:"🚀✨", free:false, text:"{name} viajó al espacio y descubrió estrellas de color ___ y planetas lejanos."},
-  {id:5, title:"El Castillo de los Disfraces", icon:"🏰👑", free:false, text:"En el castillo encantado, el rey llevaba una corona dorada y comía un rico queso ___."},
-  {id:6, title:"El Misterio en el Fondo del Mar", icon:"🌊🐟", free:false, text:"Nadando en el océano azul, un pez rápido saludó a su amigo el delfín."},
-  {id:7, title:"El Día de la Gran Carrera", icon:"🏎️💨", free:false, text:"Los autos veloces corrían por la pista roja bajo el sol brillante."},
-  {id:8, title:"El Desfile de la Ciudad Fantástica", icon:"🏙️🎉", free:false, text:"La gran celebración reunió a todos los amigos en la plaza central."}
-];
-
-var kidName='Gaddiel', kidAge=7, nativeLang='es', learnLang='en', score=0;
-var curCat='fruits', curIdx=0, queue=[];
-var LANGS={es:'Español',en:'English',it:'Italiano',fr:'Français',de:'Deutsch',ja:'日本語'};
-
-function pickAge(a){
-  kidAge=a;
-  document.querySelectorAll('.age-opt').forEach(el=>el.classList.remove('sel'));
-  document.getElementById('age'+a).classList.add('sel');
+const CATS=[{id:'fruits',name:'Frutas',icon:'🍎'},{id:'animals',name:'Animales',icon:'🦁'},{id:'colors',name:'Colores',icon:'🎨'},{id:'food',name:'Comida',icon:'🍕'},{id:'numbers',name:'Números',icon:'🔢'},{id:'clothing',name:'Ropa',icon:'👕'},{id:'house',name:'En Casa',icon:'🏠'},{id:'transport',name:'Transporte',icon:'🚀'},{id:'nature',name:'Naturaleza',icon:'🌳'},{id:'school',name:'Escuela',icon:'🏫'},{id:'body',name:'Cuerpo',icon:'🖐️'},{id:'emotions',name:'Emociones',icon:'🎭'}];
+const NOVELS=[{id:1,title:"1. El Mercado 🍎",free:true,req:['fruits','food'],reqNames:"Frutas y Comida",blanks:['apple','cheese','bread'],story:"{name} en el Mercado compró [apple], vio [cheese] y comió [bread].",nativeStory:"Mercado"},{id:2,title:"2. El Bosque 🌲",free:true,req:['animals','nature'],reqNames:"Animales y Naturaleza",blanks:['lion','tree','sun'],story:"{name} vio un [lion] junto a un [tree] bajo el [sun].",nativeStory:"Bosque"},{id:3,title:"3. Fiesta 🎨",free:false,req:['colors','clothing','emotions'],reqNames:"Colores, Ropa y Emociones",blanks:['shirt','red','happy'],story:"{name} con [shirt] [red] muy [happy].",nativeStory:"Fiesta"},{id:4,title:"4. Viaje 🚀",free:false,req:['transport','house','school'],reqNames:"Transporte, Casa y Escuela",blanks:['bus','house','bag'],story:"{name} con [bag] salió de [house] al [bus].",nativeStory:"Viaje"},{id:5,title:"5. Castillo 🏰",free:false,req:['clothing','colors','house'],reqNames:"Ropa, Colores, Casa",blanks:['hat','gold','bed'],story:"[hat] [gold] en [bed].",nativeStory:"Castillo"},{id:6,title:"6. Mar 🌊",free:false,req:['animals','nature','colors'],reqNames:"Animales, Naturaleza, Colores",blanks:['fish','blue','sea'],story:"[fish] en [sea] [blue].",nativeStory:"Mar"},{id:7,title:"7. Carrera 🏎️",free:false,req:['transport','numbers','emotions'],reqNames:"Transporte, Números, Emociones",blanks:['car','one','excited'],story:"[car] número [one] [excited].",nativeStory:"Carrera"},{id:8,title:"8. Desfile 🎉",free:false,req:['school','body','food'],reqNames:"Escuela, Cuerpo, Comida",blanks:['book','hand','pizza'],story:"[hand] con [book] y [pizza].",nativeStory:"Desfile"}];
+  let user={name:'Gaddiel',age:7,native:'es',learn:'en',score:0,completedCats:[],completedNovels:[]};
+let currentCat='fruits',currentQueue=[],gameIdx=0,activeGame='',selectedMatch=null,memoryFirst=null,memoryMatches=0,timerInt=null,timeLeft=60;
+function getLevenshtein(a,b){a=a.toLowerCase().trim();b=b.toLowerCase().trim();const m=Array.from({length:a.length+1},()=>Array(b.length+1).fill(0));for(let i=0;i<=a.length;i++)m[i][0]=i;for(let j=0;j<=b.length;j++)m[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){const c=a[i-1]===b[j-1]?0:1;m[i][j]=Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+c);}return m[a.length][b.length];}
+function calcSim(a,b){const d=getLevenshtein(a,b);const ml=Math.max(a.length,b.length);return ml===0?100:Math.round((1-d/ml)*100);}
+function pickAge(a){user.age=a;}
+function goStep(n){document.getElementById('step0').classList.add('hidden');document.getElementById('step1').classList.add('hidden');document.getElementById('step2').classList.add('hidden');document.getElementById('step'+n).classList.remove('hidden'); if(n===1){const name=document.getElementById('kidName').value.trim(); if(name) user.name=name; document.getElementById('greetH').innerText='¡Hola, '+user.name+'!';}}
+function pickNative(lang){user.native=lang;const opts=document.getElementById('learnOptions');opts.innerHTML='';const LANGS={es:'Español 🇪🇸',en:'English 🇬🇧',it:'Italiano 🇮🇹',fr:'Français 🇫🇷',de:'Deutsch 🇩🇪',ja:'日本語 🇯🇵'};for(let k in LANGS){if(k===user.native)continue;const btn=document.createElement('button');btn.className="w-full p-3 border-2 rounded-2xl font-semibold";btn.innerHTML=LANGS[k];btn.onclick=()=>{user.learn=k;saveUserData();document.getElementById('onboarding').style.display='none';};opts.appendChild(btn);}goStep(2);}
+function loadUserData(){const s=localStorage.getItem('gluna_final'); if(s){user=JSON.parse(s); document.getElementById('onboarding').style.display='none';}}
+function saveUserData(){localStorage.setItem('gluna_final',JSON.stringify(user));updateHeader();}
+function updateHeader(){document.getElementById('hProfile').innerText=user.name+' ('+user.age+'a) • '+user.learn.toUpperCase();document.getElementById('homeName').innerText=user.name;document.getElementById('score').innerText=user.score;document.getElementById('modalScore').innerText=user.score;const prog=Math.min(100,Math.round((user.completedCats.length/12)*100));document.getElementById('progBar').style.width=prog+'%';document.getElementById('progText').innerText=prog+'%';}
+function switchTab(t){document.getElementById('tabHome').classList.add('hidden');document.getElementById('tabAprender').classList.add('hidden');document.getElementById('tabNovela').classList.add('hidden');document.getElementById('navH').classList.remove('active-tab');document.getElementById('navA').classList.remove('active-tab');document.getElementById('navN').classList.remove('active-tab'); if(t==='aprender'){document.getElementById('tabAprender').classList.remove('hidden');document.getElementById('navA').classList.add('active-tab');}else if(t==='novela'){document.getElementById('tabNovela').classList.remove('hidden');document.getElementById('navN').classList.add('active-tab');renderNovels();}else{document.getElementById('tabHome').classList.remove('hidden');document.getElementById('navH').classList.add('active-tab');}}
+function getWord(item,lang){return item[lang||user.learn]||item.en;}
+function speakWord(text,lang){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const l=lang||user.learn;u.lang=l==='en'?'en-US':l==='es'?'es-ES':l==='it'?'it-IT':l==='fr'?'fr-FR':l==='de'?'de-DE':'ja-JP';speechSynthesis.speak(u);}
+function renderCategories(){const grid=document.getElementById('catGrid');grid.innerHTML='';CATS.forEach(c=>{const done=user.completedCats.includes(c.id);const card=document.createElement('button');card.className='p-4 bg-white rounded-3xl border-2 text-left shadow-sm '+(done?'border-emerald-300':'border-sky-100');card.onclick=()=>selectCategory(c.id);card.innerHTML='<span class="text-3xl">'+c.icon+'</span><h4 class="font-bold text-sm mt-2">'+c.name+'</h4><span class="text-[10px] text-slate-400">12 palabras</span>'+(done?' ✓':'');grid.appendChild(card);});}
+function selectCategory(id){currentCat=id;document.getElementById('catListView').classList.add('hidden');document.getElementById('gameSelectionView').classList.remove('hidden');document.getElementById('selCatIcon').innerText=CATS.find(x=>x.id===id).icon;document.getElementById('selCatName').innerText=CATS.find(x=>x.id===id).name;}
+function showCategories(){document.getElementById('catListView').classList.remove('hidden');document.getElementById('gameSelectionView').classList.add('hidden');renderCategories();}
+function launchGame(mode){activeGame=mode;gameIdx=0;currentQueue=[...VOCAB[currentCat]];document.getElementById('modalGameTitle').innerText=mode.toUpperCase();document.getElementById('modalGame').classList.remove('hidden');document.getElementById('modalGame').classList.add('flex');renderGameStep();}
+function closeModalGame(){document.getElementById('modalGame').classList.add('hidden');document.getElementById('modalGame').classList.remove('flex');if(timerInt){clearInterval(timerInt);timerInt=null;}}
+function awardPoints(pts){user.score+=pts;if(!user.completedCats.includes(currentCat)) user.completedCats.push(currentCat);saveUserData();}
+function showFeedback(ok,msg){const div=document.createElement('div');div.className='luna-feedback-box';let balloons='';if(ok){balloons='<div class="balloon-container">';for(let i=0;i<5;i++){let l=Math.random()*80+10;let c=['#FF6B6B','#4D96FF','#6BCB77','#FFD93D','#845EC2'][i%5];balloons+='<div class="balloon" style="left:'+l+'%;background:'+c+'" onclick="this.remove()">POP</div>';}balloons+='</div>';}div.innerHTML=balloons+'<div class="luna-feedback-card"><div class="text-5xl">'+(ok?'🌟':'😢')+'</div><h3 class="font-bold mt-2">'+(msg||(ok?'¡Excelente!':'¡Casi!'))+'</h3><button class="w-full mt-4 bg-sky-500 text-white font-bold p-3 rounded-2xl" onclick="this.closest('.luna-feedback-box').remove(); if(window.onLunaClose) window.onLunaClose();">Continuar →</button></div>';document.body.appendChild(div);}
+function renderGameStep(){const body=document.getElementById('modalGameBody');body.innerHTML='';if(gameIdx>=currentQueue.length && activeGame!=='memory' && activeGame!=='match' && activeGame!=='speed'){body.innerHTML='<div class="space-y-4"><div class="text-6xl">🎉</div><h3 class="text-2xl font-bold text-sky-600">¡Completado!</h3><button onclick="closeModalGame();showCategories();" class="w-full bg-sky-500 text-white font-bold p-3 rounded-2xl">Continuar</button></div>';awardPoints(20);return;}const item=currentQueue[gameIdx];const target=getWord(item,user.learn);const native=getWord(item,user.native);
+if(activeGame==='cards'){body.innerHTML='<div class="w-full space-y-3"><div class="text-8xl">'+item.emoji+'</div><h2 class="text-3xl font-bold">'+target+'</h2><p class="text-sm text-slate-400">('+native+')</p><div class="flex gap-2"><button onclick="speakWord(\''+target+'\')" class="flex-1 bg-sky-100 font-bold p-3 rounded-2xl">🔊</button><button onclick="nextStep()" class="flex-1 bg-sky-500 text-white font-bold p-3 rounded-2xl">→</button></div></div>';speakWord(target);}
+else if(activeGame==='quiz'){let opts=[item];while(opts.length<4){let r=VOCAB[currentCat][Math.floor(Math.random()*VOCAB[currentCat].length)]; if(!opts.includes(r)) opts.push(r);}opts.sort(()=>Math.random()-.5);body.innerHTML='<div class="w-full space-y-3"><div class="text-7xl">'+item.emoji+'</div><h3 class="font-bold">¿Cómo se dice '+native+'?</h3><div id="quizOpts" class="grid gap-2 w-full"></div></div>';const d=document.getElementById('quizOpts');opts.forEach(opt=>{const b=document.createElement('button');b.className="tf-btn";b.innerText=getWord(opt,user.learn);b.onclick=()=>{if(opt===item){window.onLunaClose=nextStep;showFeedback(true);awardPoints(10);}else{b.style.background='#FEB2B2';showFeedback(false);}};d.appendChild(b);});}
+else if(activeGame==='tf'){const isTrue=Math.random()>0.5;let wrong=VOCAB[currentCat].find(x=>x!==item)||item;const displayed=isTrue?target:getWord(wrong,user.learn);body.innerHTML='<div class="w-full space-y-4"><div class="text-8xl">'+item.emoji+'</div><p class="text-sm">¿Es correcto?</p><h3 class="text-2xl font-bold border-2 p-3 rounded-2xl">'+displayed+'</h3><div class="flex gap-3"><button id="bT" class="flex-1 bg-emerald-500 text-white font-bold p-4 rounded-2xl">✅</button><button id="bF" class="flex-1 bg-red-500 text-white font-bold p-4 rounded-2xl">❌</button></div></div>';document.getElementById('bT').onclick=()=>{if(isTrue){window.onLunaClose=nextStep;showFeedback(true);awardPoints(10);}else showFeedback(false);};document.getElementById('bF').onclick=()=>{if(!isTrue){window.onLunaClose=nextStep;showFeedback(true);awardPoints(10);}else showFeedback(false);};}
+else if(activeGame==='memory'){if(gameIdx===0){memoryFirst=null;memoryMatches=0;}let pairs=VOCAB[currentCat].slice(0,6);let cards=[];pairs.forEach(p=>{cards.push({id:p.en,show:p.emoji});cards.push({id:p.en,show:getWord(p,user.learn)});});cards.sort(()=>Math.random()-.5);body.innerHTML='<h3 class="font-bold mb-2">🧠 Memoria 6 pares</h3><div id="memGrid" class="grid grid-cols-3 gap-2 w-full"></div><p class="text-xs mt-2"><span id="memProg">0/6</span></p>';const grid=document.getElementById('memGrid');cards.forEach(c=>{const div=document.createElement('div');div.className='mem-card';div.innerText='?';div.dataset.id=c.id;div.dataset.show=c.show;div.onclick=()=>{if(div.classList.contains('matched')||div.classList.contains('revealed'))return;div.innerText=div.dataset.show;div.classList.add('revealed');if(!memoryFirst){memoryFirst=div;}else{if(memoryFirst.dataset.id===div.dataset.id && memoryFirst!==div){memoryFirst.classList.add('matched');div.classList.add('matched');memoryMatches++;document.getElementById('memProg').innerText=memoryMatches+'/6';memoryFirst=null;if(memoryMatches===6){setTimeout(()=>{window.onLunaClose=()=>{closeModalGame();showCategories();};showFeedback(true,'¡6 pares! +30⭐');awardPoints(30);},400);}}else{const f=memoryFirst;setTimeout(()=>{f.innerText='?';div.innerText='?';f.classList.remove('revealed');div.classList.remove('revealed');memoryFirst=null;},800);memoryFirst=null;}}};grid.appendChild(div);});}
+else if(activeGame==='listen'){body.innerHTML='<div class="w-full space-y-4"><div class="text-7xl">👂</div><h3 class="font-bold">Escucha y elige</h3><button onclick="speakWord(\''+target+'\')" class="w-full bg-sky-100 font-bold p-4 rounded-2xl">🔊 Escuchar</button><div id="listenOpts" class="grid gap-2 w-full"></div></div>';speakWord(target);let opts=[item];while(opts.length<4){let r=VOCAB[currentCat][Math.floor(Math.random()*VOCAB[currentCat].length)]; if(!opts.includes(r)) opts.push(r);}opts.sort(()=>Math.random()-.5);const d=document.getElementById('listenOpts');opts.forEach(opt=>{const b=document.createElement('button');b.className='tf-btn';b.innerText=opt.emoji+' '+getWord(opt,user.learn);b.onclick=()=>{if(opt===item){window.onLunaClose=nextStep;showFeedback(true);awardPoints(10);}else{b.style.background='#FEB2B2';showFeedback(false);}};d.appendChild(b);});}
+else if(activeGame==='riddle'){const clues=["Empieza con "+target[0].toUpperCase()+" y tiene "+target.length+" letras","Es de "+currentCat+" "+item.emoji,"Suena como "+target.slice(0,2)+"..."];body.innerHTML='<div class="w-full space-y-3"><div class="text-6xl blur-[8px]">'+item.emoji+'</div><h3 class="font-bold">🤔 3 pistas</h3><div class="text-left bg-white p-3 rounded-2xl border text-xs space-y-2"><div class="bg-blue-50 p-2 rounded-lg">'+clues[0]+'</div><div class="bg-yellow-50 p-2 rounded-lg">'+clues[1]+'</div><div class="bg-green-50 p-2 rounded-lg">'+clues[2]+'</div></div><div id="riddleOpts" class="grid gap-2 w-full"></div></div>';let opts=[item];while(opts.length<3){let r=VOCAB[currentCat][Math.floor(Math.random()*VOCAB[currentCat].length)]; if(!opts.includes(r)) opts.push(r);}opts.sort(()=>Math.random()-.5);const d=document.getElementById('riddleOpts');opts.forEach(opt=>{const b=document.createElement('button');b.className='tf-btn';b.innerText=getWord(opt,user.learn)+' '+opt.emoji;b.onclick=()=>{if(opt===item){window.onLunaClose=nextStep;showFeedback(true);awardPoints(15);}else showFeedback(false);};d.appendChild(b);});}
+else if(activeGame==='spell'){body.innerHTML='<div class="w-full space-y-3"><div class="text-7xl">'+item.emoji+'</div><h3 class="font-bold">✍️ Deletrea: '+native+'</h3><input id="spellIn" placeholder="Escribe en '+user.learn+'" class="w-full text-center text-lg font-bold p-3 border-2 border-sky-200 rounded-2xl"><div id="spellFb" class="text-sm font-bold min-h-[20px]"></div><div class="flex gap-2"><button onclick="speakWord(\''+target+'\')" class="flex-1 bg-sky-100 font-bold p-3 rounded-2xl">🔊</button><button onclick="checkSpell()" class="flex-1 bg-sky-500 text-white font-bold p-3 rounded-2xl">Comprobar</button></div></div>';window.checkSpell=()=>{const inp=document.getElementById('spellIn');const fb=document.getElementById('spellFb');if(inp.value.trim().toLowerCase()===target.toLowerCase()){fb.innerText='✅ ¡Correcto!';fb.style.color='green';window.onLunaClose=nextStep;showFeedback(true);awardPoints(15);}else{fb.innerText='❌ Era: '+target;fb.style.color='red';showFeedback(false);}};}
+else if(activeGame==='match'){if(gameIdx===0) selectedMatch=null;let list=VOCAB[currentCat].slice(0,4);body.innerHTML='<h3 class="font-bold mb-2">🔗 Une emoji con palabra</h3><div class="grid grid-cols-2 gap-3 w-full"><div id="matchLeft" class="grid gap-2"></div><div id="matchRight" class="grid gap-2"></div></div><p class="text-xs mt-2"><span id="matchProg">0/4</span></p>';const left=document.getElementById('matchLeft');const right=document.getElementById('matchRight');let leftItems=[...list];let rightItems=[...list];rightItems.sort(()=>Math.random()-.5);leftItems.forEach(it=>{const b=document.createElement('button');b.className='tf-btn text-center';b.innerText=it.emoji;b.dataset.id=it.en;b.onclick=()=>{document.querySelectorAll('#matchLeft.tf-btn').forEach(x=>x.style.borderColor='#E2E8F0');b.style.borderColor='#63B3ED';selectedMatch=b;};left.appendChild(b);});let matched=0;rightItems.forEach(it=>{const b=document.createElement('button');b.className='tf-btn text-center';b.innerText=getWord(it,user.learn);b.dataset.id=it.en;b.onclick=()=>{if(!selectedMatch){showFeedback(false,'Elige emoji primero');return;}if(selectedMatch.dataset.id===b.dataset.id){selectedMatch.style.background='#C6F6D5';b.style.background='#C6F6D5';selectedMatch.style.pointerEvents='none';b.style.pointerEvents='none';matched++;document.getElementById('matchProg').innerText=matched+'/4';selectedMatch=null;if(matched===4){setTimeout(()=>{window.onLunaClose=()=>{closeModalGame();showCategories();};showFeedback(true,'¡4/4! +30⭐');awardPoints(30);},400);}}else{showFeedback(false);}};right.appendChild(b);});}
+else if(activeGame==='speed'){if(gameIdx===0){timeLeft=60;}body.innerHTML='<div class="w-full space-y-3"><div class="flex justify-between w-full font-bold"><span>⚡ Rápido</span><span id="timeLeft" class="text-red-500">'+timeLeft+'s</span></div><div class="text-7xl">'+item.emoji+'</div><h3 class="text-2xl font-bold">'+target+'</h3><div id="speedOpts" class="grid grid-cols-2 gap-2 w-full"></div></div>';if(!timerInt){timerInt=setInterval(()=>{timeLeft--;const el=document.getElementById('timeLeft'); if(el) el.innerText=timeLeft+'s';if(timeLeft<=0){clearInterval(timerInt);timerInt=null;window.onLunaClose=()=>{closeModalGame();};showFeedback(true,'Tiempo: +'+(60-timeLeft)+' pts');awardPoints(Math.max(5,60-timeLeft));}},1000);}let opts=[item];while(opts.length<4){let r=VOCAB[currentCat][Math.floor(Math.random()*VOCAB[currentCat].length)]; if(!opts.includes(r)) opts.push(r);}opts.sort(()=>Math.random()-.5);const d=document.getElementById('speedOpts');opts.forEach(opt=>{const b=document.createElement('button');b.className='tf-btn text-center';b.innerText=getWord(opt,user.learn);b.onclick=()=>{if(opt===item){awardPoints(5);gameIdx=(gameIdx+1)%currentQueue.length;renderGameStep();}else{b.style.background='#FEB2B2';}};d.appendChild(b);});}
+else if(activeGame==='story'){const list=VOCAB[currentCat].slice(0,3);const storyText="Había una vez "+user.name+" que tenía ___ "+list[0].emoji+" y encontró ___ "+list[1].emoji+" y comió ___ "+list[2].emoji+".";body.innerHTML='<div class="w-full space-y-3 text-left"><div class="bg-blue-50 border p-3 rounded-2xl"><h4 class="font-bold">📖 Cuento</h4><p id="storyText" class="mt-2">'+storyText.replace(/___/g,'<span class="blank font-bold text-sky-600 border-b-2 border-dashed px-2">___</span>')+'</p><p class="text-xs text-slate-500 mt-2">Tenía '+getWord(list[0],user.native)+', encontró '+getWord(list[1],user.native)+', comió '+getWord(list[2],user.native)+'</p></div><div id="storyOpts" class="flex flex-wrap gap-2"></div><button onclick="nextStep()" class="w-full bg-white border font-bold p-3 rounded-2xl mt-2">Siguiente cuento →</button></div>';const optsDiv=document.getElementById('storyOpts');list.forEach(it=>{const b=document.createElement('button');b.className='tf-btn w-auto px-4';b.innerText=getWord(it,user.learn);b.dataset.w=getWord(it,user.learn);b.onclick=()=>{const blanks=document.querySelectorAll('.blank');for(let bl of blanks){if(bl.innerText==='___'){bl.innerText=b.dataset.w;break;}}};optsDiv.appendChild(b);});}
+else if(activeGame==='repeat'){body.innerHTML='<div class="w-full space-y-4"><div class="text-7xl">'+item.emoji+'</div><h3 class="text-2xl font-bold">'+target+'</h3><p class="text-xs text-slate-400">80% mínimo</p><div id="voiceStatus" class="p-3 rounded-2xl bg-slate-50 border text-xs font-bold">Presiona Hablar</div><div class="space-y-2"><button onclick="speakWord(\''+target+'\')" class="w-full bg-sky-100 font-bold p-3 rounded-2xl">🔊 Escuchar</button><button onclick="startVoice(\''+target+'\')" class="w-full bg-emerald-500 text-white font-bold p-4 rounded-2xl">🎤 Hablar</button><button onclick="skipToEnd()" class="text-xs font-bold text-amber-600 underline">Saltar al final ⏩</button></div></div>';}
 }
-
-function showBox(n){
-  document.querySelectorAll('.box').forEach(b=>b.classList.remove('active'));
-  document.getElementById('step'+n).classList.add('active');
-}
-
-function goStep1(){
-  kidName=document.getElementById('kidName').value.trim()||'Gaddiel';
-  document.getElementById('greetH').innerText='¡Hola '+kidName+'!';
-  showBox(1);
-}
-
-function pickNative(l){
-  nativeLang=l;
-  var box=document.getElementById('learnBox');
-  box.innerHTML='';
-  for(var k in LANGS){
-    if(k==nativeLang) continue;
-    let langKey=k;
-    var d=document.createElement('div');
-    d.className='opt';
-    d.innerText=LANGS[k];
-    d.onclick=function(){
-      learnLang=langKey;
-      saveAndStart();
-    };
-    box.appendChild(d);
-  }
-  showBox(2);
-}
-
-function saveAndStart(){
-  localStorage.setItem('gluna_name',kidName);
-  localStorage.setItem('gluna_age',kidAge);
-  localStorage.setItem('gluna_native',nativeLang);
-  localStorage.setItem('gluna_learn',learnLang);
-  document.getElementById('onboarding').style.display='none';
-  initApp();
-}
-
-function initApp(){
-  kidName=localStorage.getItem('gluna_name')||'Gaddiel';
-  nativeLang=localStorage.getItem('gluna_native')||'es';
-  learnLang=localStorage.getItem('gluna_learn')||'en';
-  score=parseInt(localStorage.getItem('gluna_score')||'0');
-  
-  document.getElementById('hName').innerText=kidName;
-  document.getElementById('homeName').innerText=kidName;
-  document.getElementById('score').innerText=score;
-  
-  renderCats();
-  renderNovels();
-}
-
-function renderCats(){
-  var div=document.getElementById('catList');
-  div.innerHTML='';
-  CATS.forEach(c=>{
-    var b=document.createElement('button');
-    b.className='cat-btn';
-    b.innerHTML='<div style="font-size:32px">'+c.icon+'</div><b>'+c.name+'</b><small style="color:#718096">'+(DB[c.id]?DB[c.id].length:0)+' palabras</small>';
-    b.onclick=function(){selectCat(c.id);};
-    div.appendChild(b);
-  });
-}
-
-function selectCat(id){
-  curCat=id;
-  document.getElementById('catView').style.display='none';
-  document.getElementById('gamesView').style.display='block';
-  var c=CATS.find(x=>x.id==id);
-  document.getElementById('selCatIcon').innerText=c.icon;
-  document.getElementById('selCatName').innerText=c.name;
-}
-
-function showCategories(){
-  document.getElementById('catView').style.display='block';
-  document.getElementById('gamesView').style.display='none';
-}
-
-function switchTab(t){
-  document.getElementById('tabHome').style.display='none';
-  document.getElementById('tabAprender').style.display=t=='aprender'?'block':'none';
-  document.getElementById('tabNovela').style.display=t=='novela'?'block':'none';
-  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
-  if(t=='aprender') document.getElementById('navA').classList.add('active');
-  else if(t=='novela') document.getElementById('navN').classList.add('active');
-  else document.getElementById('navH').classList.add('active');
-}
-
-function goHome(){switchTab('home');}
-
-function t(item){return item[learnLang]||item.en;}
-function tn(item){return item[nativeLang]||item.es;}
-
-function speak(text){
-  speechSynthesis.cancel();
-  var u=new SpeechSynthesisUtterance(text);
-  u.lang=learnLang=='en'?'en-US':learnLang=='es'?'es-ES':'it-IT';
-  speechSynthesis.speak(u);
-}
-
-function celebrate(pts){
-  score+=(pts||10);
-  localStorage.setItem('gluna_score',score);
-  document.getElementById('score').innerText=score;
-  if(document.getElementById('modalScore')) document.getElementById('modalScore').innerText=score;
-  showLunaModal(true);
-}
-
-function showLunaModal(isCorrect){
-  var div=document.createElement('div');
-  div.className='luna-feedback-box';
-  
-  var imgSrc = isCorrect ? 'watermarked_img_6264109513854181933.jpg' : 'watermarked_img_8258750872017433407.jpg';
-  var fallbackIcon = isCorrect ? '🌟' : '😢';
-  var msg = isCorrect ? '¡Excelente trabajo! 🎉' : '¡Casi! Inténtalo de nuevo 💪';
-  
-  var balloonsHTML = '';
-  if(isCorrect){
-    balloonsHTML = '<div class="balloon-container">';
-    for(var i=0; i<6; i++){
-      var left = Math.random()*85 + 5;
-      var delay = Math.random()*1.5;
-      var bgCol = ['#FF6B6B','#4D96FF','#6BCB77','#FFD93D','#845EC2'][i%5];
-      balloonsHTML += '<div class="balloon" style="left:'+left+'%;background:'+bgCol+';animation-delay:'+delay+'s" onclick="popBalloon(this)">POP</div>';
-    }
-    balloonsHTML += '</div>';
-  }
-
-  div.innerHTML = balloonsHTML + '<div class="luna-feedback-card"><img src="'+imgSrc+'" class="luna-img-fb" onerror="this.outerHTML=\'<div class=\\\ me-2 luna-img-fb\\\ style=\\\ display:flex;align-items:center;justify-content:center;font-size:60px;background:#EBF8FF\\\>'+fallbackIcon+'</div>\'"><h3>'+msg+'</h3><button class="btn" style="margin-top:14px" onclick="this.closest(\'.luna-feedback-box\').remove(); if(window.onLunaClose) window.onLunaClose();">Continuar →</button></div>';
-  document.body.appendChild(div);
-}
-
-function popBalloon(el){
-  el.style.transform = 'scale(1.4)';
-  el.style.opacity = '0';
-  setTimeout(()=>el.remove(), 200);
-}
-
-// JUEGOS
-function openGame(g){
-  window.curGame=g;
-  curIdx=0;
-  queue=[...(DB[curCat]||DB.fruits)];
-  document.getElementById('modal').style.display='flex';
-  document.getElementById('modalTitle').innerText=g.toUpperCase();
-  document.getElementById('modalScore').innerText=score;
-  renderGame();
-}
-
-function closeGame(){
-  document.getElementById('modal').style.display='none';
-}
-
-function renderGame(){
-  var body=document.getElementById('modalBody');
-  var item=queue[curIdx%queue.length];
-  var g=window.curGame;
-
-  if(g=='cards'){
-    body.innerHTML='<div class="card" style="width:100%;text-align:center"><div style="font-size:70px">'+item.emoji+'</div><h2 style="margin:10px 0">'+t(item)+'</h2><p style="color:#718096">'+tn(item)+'</p><div style="display:flex;gap:8px;margin-top:16px"><button class="btn btn-ghost" onclick="speak(\''+t(item)+'\')">🔊 Escuchar</button><button class="btn" onclick="nextWord()">Siguiente →</button></div></div>';
-  }
-  else if(g=='quiz'){
-    body.innerHTML='<div style="font-size:80px">'+item.emoji+'</div><h3>¿Cómo se dice en '+LANGS[learnLang]+'?</h3><div id="opts" style="width:100%;margin-top:14px"></div>';
-    var opts=[item];
-    while(opts.length<4){
-      var r=queue[Math.floor(Math.random()*queue.length)];
-      if(!opts.includes(r)) opts.push(r);
-    }
-    opts.sort(()=>Math.random()-.5);
-    var div=document.getElementById('opts');
-    opts.forEach(o=>{
-      var b=document.createElement('button');
-      b.className='opt';
-      b.style.width='100%';
-      b.innerText=t(o);
-      b.onclick=function(){
-        if(o==item){
-          window.onLunaClose = nextWord;
-          celebrate(15);
-        } else {
-          showLunaModal(false);
-        }
-      };
-      div.appendChild(b);
-    });
-  }
-  else if(g=='repeat'){
-    body.innerHTML='<div class="card" style="width:100%;text-align:center"><div style="font-size:70px">'+item.emoji+'</div><h2>'+t(item)+'</h2><p style="color:#718096">Pronuncia la palabra</p><div style="margin-top:20px;display:flex;gap:8px"><button class="btn btn-ghost" onclick="speak(\''+t(item)+'\')">🔊 Escuchar</button><button class="btn" style="background:#48BB78" onclick="testVoice(\''+t(item)+'\')">🎤 Hablar</button></div><button class="btn btn-ghost" style="margin-top:8px" onclick="nextWord()">Saltar →</button></div>';
-  }
-  else{
-    body.innerHTML='<div style="font-size:70px">'+item.emoji+'</div><h2>'+t(item)+'</h2><button class="btn" onclick="nextWord()">Continuar →</button>';
-  }
-}
-
-function nextWord(){
-  curIdx++;
-  if(curIdx>=queue.length){
-    document.getElementById('modalBody').innerHTML='<h3>🎉 ¡Completado!</h3><p>Has ganado estrellas por tu esfuerzo.</p><button class="btn" onclick="closeGame()">Volver</button>';
-    return;
-  }
-  renderGame();
-}
-
-function testVoice(target){
-  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition){
-    window.onLunaClose = nextWord;
-    celebrate(20);
-    return;
-  }
-  var rec = new SpeechRecognition();
-  rec.lang = learnLang=='en'?'en-US':'es-ES';
-  rec.start();
-  rec.onresult = function(e){
-    var text = e.results[0][0].transcript.toLowerCase();
-    if(text.includes(target.toLowerCase())){
-      window.onLunaClose = nextWord;
-      celebrate(25);
-    } else {
-      showLunaModal(false);
-    }
-  };
-}
-
-// NOVELAS PRO
-function renderNovels(){
-  var div=document.getElementById('novelList');
-  div.innerHTML='';
-  NOVELS.forEach(n=>{
-    var card=document.createElement('div');
-    card.className='card';
-    var title=n.title.replace('{name}',kidName);
-    
-    var badge = n.free ? '<span style="background:#C6F6D5;color:#22543D;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700">GRATIS</span>' : '<span style="background:#FED7D7;color:#9B2C2C;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700">🔒 PRO</span>';
-    
-    card.innerHTML='<div style="display:flex;gap:12px;align-items:center"><div><div style="font-size:34px">'+n.icon+'</div></div><div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:center"><h4>'+title+'</h4>'+badge+'</div><p style="font-size:13px;color:#718096;margin:4px 0">'+n.text.replace('{name}',kidName)+'</p><button class="btn" style="padding:8px 14px;font-size:13px" onclick="playNovel('+n.id+')">'+(n.free?'Leer Cuento (+40⭐)':'Desbloquear PRO 🚀')+'</button></div></div>';
-    div.appendChild(card);
-  });
-}
-
-function playNovel(id){
-  var n=NOVELS.find(x=>x.id==id);
-  if(!n.free){
-    alert("🔒 ¡Cuento exclusivo de GLuna PRO!\n\nPróximamente disponible con la suscripción familiar para monetizar todo el contenido ilimitado.");
-    return;
-  }
-  document.getElementById('modal').style.display='flex';
-  document.getElementById('modalTitle').innerText=n.title;
-  var body=document.getElementById('modalBody');
-  body.innerHTML='<div class="card" style="width:100%"><div style="font-size:40px;text-align:center">'+n.icon+'</div><h3 style="text-align:center;margin-bottom:12px">'+n.title+'</h3><p style="font-size:18px;line-height:1.6">'+n.text.replace('{name}',kidName)+'</p><button class="btn" onclick="window.onLunaClose=closeGame; celebrate(40);">¡Completar Cuento! ⭐</button></div>';
-}
-
-// INICIO AUTOMÁTICO
-(function(){
-  if(localStorage.getItem('gluna_name')){
-    document.getElementById('onboarding').style.display='none';
-    initApp();
-  }
-})();
+function nextStep(){gameIdx++;renderGameStep();}
+function skipToEnd(){const cur=currentQueue.splice(gameIdx,1)[0];currentQueue.push(cur);renderGameStep();}
+function startVoice(target){const status=document.getElementById('voiceStatus');const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){const sim=Math.floor(Math.random()*21)+80;status.className="p-3 rounded-2xl bg-emerald-100 text-emerald-800 font-bold text-xs";status.innerText='Simulación: '+sim+'%';setTimeout(()=>{window.onLunaClose=nextStep;showFeedback(true);awardPoints(15);},800);return;}const rec=new SR();rec.lang=user.learn==='en'?'en-US':user.learn==='es'?'es-ES':'it-IT';status.innerText="Escuchando... 🎙️";status.className="p-3 rounded-2xl bg-yellow-100 text-amber-800 font-bold text-xs animate-pulse";rec.start();rec.onresult=(e)=>{const spoken=e.results[0][0].transcript;const score=calcSim(spoken,target);if(score>=80){status.className="p-3 rounded-2xl bg-emerald-100 text-emerald-800 font-bold text-xs";status.innerText=spoken+' • '+score+'% ¡Aprobado!';setTimeout(()=>{window.onLunaClose=nextStep;showFeedback(true);awardPoints(15);},800);}else{status.className="p-3 rounded-2xl bg-red-100 text-red-800 font-bold text-xs";status.innerText=spoken+' • '+score+'% (80%+)';showFeedback(false);}};}
+function findItem(key){for(let cat in VOCAB){let f=VOCAB[cat].find(x=>x.en===key); if(f) return f;} return VOCAB.fruits[0];}
+function renderNovels(){const list=document.getElementById('novelList');list.innerHTML='';NOVELS.forEach(n=>{const hasReq=n.req.every(c=>user.completedCats.includes(c));const done=user.completedNovels.includes(n.id);const card=document.createElement('div');card.className='p-4 bg-white rounded-3xl border-2 shadow-sm space-y-2 '+(done?'border-emerald-300':hasReq?'border-purple-200':'border-slate-100 opacity-80');card.innerHTML='<div class="flex justify-between"><h3 class="font-bold text-sm">'+n.title+'</h3>'+(done?'<span class="text-xs bg-emerald-100 px-2 py-0.5 rounded-full">✓</span>':n.free?'<span class="text-xs bg-green-100 px-2 py-0.5 rounded-full">GRATIS</span>':'<span class="text-xs bg-red-100 px-2 py-0.5 rounded-full">🔒 PRO</span>')+'</div><p class="text-xs text-slate-500">Requiere: <b>'+n.reqNames+'</b></p>'+(hasReq?'<button onclick="playNovel('+n.id+')" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold p-3 rounded-2xl text-xs">'+(done?'Volver a leer':'¡Resolver! +40⭐')+'</button>':'<div class="p-2.5 bg-amber-50 rounded-2xl text-[11px] font-semibold">🔒 Completa '+n.reqNames+'</div>');list.appendChild(card);});const allDone=NOVELS.every(n=>user.completedNovels.includes(n.id));const final=document.createElement('div');final.className='p-5 rounded-3xl text-center space-y-3 '+(allDone?'bg-gradient-to-r from-yellow-300 to-orange-400 shadow-xl border-4 border-yellow-100':'bg-slate-200 opacity-60');final.innerHTML='<div class="text-4xl">✨ 🌙 🦋 🐝 🐿️ ✨</div><h3 class="font-bold">Gran Final</h3>'+(allDone?'<button onclick="awardPoints(100);showFeedback(true,\'¡100⭐!\');" class="w-full bg-slate-900 text-white font-bold p-3 rounded-2xl text-xs">✨ Final +100⭐</button>':'<span class="text-xs bg-slate-300 px-3 py-1 rounded-full">Completa 8 novelas</span>');list.appendChild(final);}
+function playNovel(id){const n=NOVELS.find(x=>x.id===id);if(!n.req.every(c=>user.completedCats.includes(c))){showFeedback(false,'Bloqueado: '+n.reqNames);return;}let answers={};document.getElementById('modalGameTitle').innerText=n.title;document.getElementById('modalGame').classList.remove('hidden');document.getElementById('modalGame').classList.add('flex');const renderUI=()=>{let story=n.story.replace('{name}',user.name);n.blanks.forEach(b=>{const filled=answers[b];const word=getWord(findItem(b),user.learn);const html=filled?'<span class="font-bold text-indigo-600 underline bg-indigo-50 rounded-lg px-1">'+word+'</span>':'<span class="font-bold text-slate-400 border-b-2 border-indigo-400 px-3">___</span>';story=story.replace('['+b+']',html);});let need=n.blanks.find(b=>!answers[b]);const body=document.getElementById('modalGameBody');body.innerHTML='<div class="w-full space-y-4 text-left"><div class="p-3 bg-amber-50 border rounded-2xl text-xs"><b>💡 '+user.native.toUpperCase()+':</b> '+n.nativeStory+'</div><div class="p-4 bg-white border-2 border-indigo-100 rounded-3xl font-semibold">'+story+'</div>'+(need?'<div class="space-y-2"><p class="text-xs text-center font-bold uppercase">Elige en '+user.learn.toUpperCase()+':</p><div id="novelOpts" class="grid grid-cols-2 gap-2"></div></div>':'<button id="btnFinish" class="w-full bg-emerald-500 text-white font-bold p-4 rounded-2xl">🎉 ¡Completar! +40⭐</button>')+'</div>';if(need){const target=findItem(need);let choices=[target];while(choices.length<4){let rc=n.req[Math.floor(Math.random()*n.req.length)];let ri=VOCAB[rc][Math.floor(Math.random()*VOCAB[rc].length)]; if(!choices.includes(ri)) choices.push(ri);}choices.sort(()=>Math.random()-.5);const opts=document.getElementById('novelOpts');choices.forEach(ch=>{const w=getWord(ch,user.learn);const btn=document.createElement('button');btn.className="p-3 bg-indigo-50 border-2 border-indigo-100 rounded-2xl font-bold text-sm";btn.innerText=ch.emoji+' '+w;btn.onclick=()=>{if(ch===target){answers[need]=true;renderUI();}else{btn.classList.add('border-red-400');}};opts.appendChild(btn);});}else{document.getElementById('btnFinish').onclick=()=>{if(!user.completedNovels.includes(n.id)){user.completedNovels.push(n.id);awardPoints(40);}window.onLunaClose=()=>{closeModalGame();renderNovels();};showFeedback(true,'+40⭐');};}};renderUI();}
+window.onload=()=>{loadUserData();updateHeader();renderCategories();renderNovels();document.getElementById('navH').classList.add('active-tab');};
 </script>
 </body>
 </html>
